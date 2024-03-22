@@ -2,7 +2,7 @@ import React from "react";
 
 const Hero = () => {
     return (
-        <div className="h-80 bg-slate-600 font-bold font-white text-3xl px-60 pt-[100px] text-white">
+        <div className="h-80 bg-gradient-to-r from-[#2B293D] via-[#5A5A5A] to-[#2b293d] font-bold font-white text-3xl px-60 pt-[100px] text-white">
             <p className="pb-2">Don't miss out!</p>
             <p className="pb-7">Explore the <span className="text-[#ffe047]">vibrant events</span> happening locally and globally.</p>
             <div className="relative mt-2 rounded-md shadow-sm w-3/4 m-auto">

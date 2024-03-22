@@ -1,21 +1,16 @@
-import React, { useState } from "react";
 import logo from '../img/logo.png'
+import { Link, NavLink } from "react-router-dom";
 
 const Header = () => {
-    const [header, setHeader] = useState(false)
-
-    const headerHandler = () => {
-        setHeader(!header)
-    }
 
     return (
         <div className="flex justify-between items-center h-12 bg-[#2B293D] text-white px-20 py-4 m-auto">
-            <img src={logo} alt="Logo" className="w-40" />
+            <Link to={`/`}><img src={logo} alt="Logo" className="w-40" /></Link>
             <ul className="hidden md:flex">
-                <li className="py-3 px-6 border-b border-gray-500-2 border-[#ffe047]">Home</li>
-                <li className="py-3 px-6">Events</li>
-                <li className="py-3 px-6">About</li>
-                <li className="py-3 px-6">Contact</li>
+                <NavLink to='/' className={({isActive}) => isActive ? 'border-b border-[#ffe047]': ''}><li className="py-3 px-6">Home</li></NavLink>
+                <NavLink to='/events' className={({isActive}) => isActive ? 'border-b border-[#ffe047]': ''}><li className="py-3 px-6">Events</li></NavLink>
+                <NavLink to='/about' className={({isActive}) => isActive ? 'border-b border-[#ffe047]': ''}><li className="py-3 px-6">About</li></NavLink>
+                <NavLink to='/contact' className={({isActive}) => isActive ? 'border-b border-[#ffe047]': ''}><li className="py-3 px-6">Contact</li></NavLink>
             </ul>
             <ul className="hidden md:flex items-center">
                 <li className="p-3">Create Event</li>
@@ -32,15 +27,15 @@ Interested</li>
 </svg>
                 Profile</li>
             </ul>
-            <div onClick={headerHandler} className="block md:hidden">
-                {!header ? <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+            <div className="block md:hidden">
+                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
   <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
 </svg> : <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
   <path fillRule="evenodd" d="M5.47 5.47a.75.75 0 0 1 1.06 0L12 10.94l5.47-5.47a.75.75 0 1 1 1.06 1.06L13.06 12l5.47 5.47a.75.75 0 1 1-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 0 1-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 0 1 0-1.06Z" clipRule="evenodd" />
-</svg>}
+</svg>
             
             </div>
-            <div className={header ? 'fixed left-0 top-0 w-[60%] border-r border-r-white h-full p-3 bg-[#2B293D] ease-in-out duration-500' : 'fixed left-[-100%]'}>
+            <div className='top-0 w-[60%] border-r border-r-white h-full p-3 bg-[#2B293D] ease-in-out duration-500 fixed left-[-100%]'>
             <img src={logo} alt="Logo" className="w-40" />
                 <ul className="p-3">
                     <li className="py-3 px-6 border-b border-gray-500">Home</li>

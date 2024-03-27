@@ -6,7 +6,9 @@ import axios from "../api/axios";
 import useAuth from "../hooks/useAuth";
 
 function LoginPage() {
-  const { setAuth } = useAuth();
+  const { setAuth, auth } = useAuth();
+
+  console.log(auth);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -30,7 +32,7 @@ function LoginPage() {
       );
       console.log(JSON.stringify(response?.data));
       const accessToken = response?.data?.accessToken;
-      setAuth({ email, password, accessToken });
+      setAuth({ email, id: response?.data?.id, accessToken });
       setEmail("");
       setPwd("");
       navigate(from, { replace: true });

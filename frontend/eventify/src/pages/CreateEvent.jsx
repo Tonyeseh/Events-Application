@@ -5,11 +5,8 @@ import Footer from "../components/Footer";
 import progress from "../img/edit-progress.png";
 import UseFormContext from "../hooks/UseFormContext";
 import SessionComponent from "../components/SessionInfo";
-import useAuth from "../hooks/useAuth";
 
 const CreateEvent = () => {
-  const { auth } = useAuth();
-  console.log(auth);
   const { handleChange, data, setFormData } = UseFormContext();
   const [sessionChildren, setSessionChildren] = useState({
     id: Math.random(100000),

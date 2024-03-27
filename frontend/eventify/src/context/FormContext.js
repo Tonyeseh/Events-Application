@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState } from "react";
 
 const FormContext = createContext({})
 
@@ -26,18 +26,29 @@ export const FormProvider = ({ children }) => {
     })
 
     const handleChange = e => {
-        // const type = e.target.type
+        const type = e.target.type
 
         const name = e.target.name
 
-        const value = e.target.value
+        const value = type === 'file' ? e.target.files[0] : e.target.value
 
+        if (name.startsWith('session')) {
+
+            setFormData(prevData => {
+                prevData.session = {
+                    ...prevData.session,
+                    [name]: value
+                }
+                return prevData
+            })
+        } else {
         setFormData(prevData => {
             return {
                 ...prevData,
                 [name]: value,
             }
         })
+    }
         console.log(data)
     }
 

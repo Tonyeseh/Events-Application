@@ -9,8 +9,8 @@ import CreateEvent from './pages/CreateEvent';
 import EventBanner from "./pages/EventBanner";
 import TicketingPage from "./pages/TicketingPage";
 import ReviewEvent from "./pages/ReviewEvent";
-
 import { FormProvider } from "./context/FormContext";
+import RequireAuth from "./components/RequireAuth";
 
 function App() {
   return (
@@ -21,13 +21,15 @@ function App() {
         <Route path="/events/:id" element={ <EventPage /> } />
         <Route path="/login" element={ <LoginPage /> } />
         <Route path="/register" element={ <RegisterPage /> } />
-        </Routes>
+      </Routes>
         <FormProvider>
           <Routes>
-          <Route path="/create-event" element={ <CreateEvent /> } />
-          <Route path="/create-event/banner" element={ <EventBanner /> } />
-          <Route path="/create-event/ticketing" element={ <TicketingPage /> } />
-          <Route path="/create-event/review" element={ <ReviewEvent /> } />
+            <Route element={<RequireAuth />}>
+              <Route path="/create-event" element={ <CreateEvent /> } />
+              <Route path="/create-event/banner" element={ <EventBanner /> } />
+              <Route path="/create-event/ticketing" element={ <TicketingPage /> } />
+              <Route path="/create-event/review" element={ <ReviewEvent /> } />
+            </Route>
         </Routes>
       </FormProvider>
     </>

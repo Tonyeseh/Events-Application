@@ -7,7 +7,7 @@ const CategorySection = () => {
             <h1 className="font-bold text-xl pb-7">
                 Explore Categories
             </h1>
-            <div className="flex justify-between items-center">
+            <div className="flex flex-wrap gap-20 justify-between items-center">
                 <Category data={{
                     name: 'Entertainment'
                 }} />

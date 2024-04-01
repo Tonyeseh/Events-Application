@@ -63,19 +63,19 @@ const Header = () => {
         <NavLink to={"/create-event"}>
           <li className='px-5'>Create Event</li>
         </NavLink>
-        {!auth.email && (
+        {!auth.user && (
           <NavLink to={"/login"}>
             <li className='px-5'>Login</li>
           </NavLink>
         )}
-        {!auth.email && (
+        {!auth.user && (
           <NavLink to={"/register"}>
             <li className='bg-[#ffe047] rounded-md py-1 px-5 text-[#2b293d]'>
               Register
             </li>
           </NavLink>
         )}
-        {auth.email && (
+        {auth.user && (
           <li className='p-3 text-sm flex flex-col items-center'>
             <svg
               xmlns='http://www.w3.org/2000/svg'
@@ -94,7 +94,7 @@ const Header = () => {
             Tickets
           </li>
         )}
-        {auth.email && (
+        {auth.user && (
           <li className='p-3 text-sm flex flex-col items-center'>
             <svg
               xmlns='http://www.w3.org/2000/svg'
@@ -113,7 +113,7 @@ const Header = () => {
             Interested
           </li>
         )}
-        {auth.email && (
+        {auth.user && (
           <li className='p-3 text-sm flex items-center'>
             <div className='text-sm flex flex-col items-center'>
               <svg
@@ -134,7 +134,7 @@ const Header = () => {
             </div>
           </li>
         )}
-        {auth.email && (
+        {auth.user && (
           <li
             className='p-3 text-sm flex flex-col items-center'
             onClick={logout}

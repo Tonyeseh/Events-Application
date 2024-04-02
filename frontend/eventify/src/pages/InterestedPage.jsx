@@ -16,7 +16,6 @@ const InterestedPage = () => {
             Authorization: `Bearer ${auth.accessToken}`,
           },
         });
-        console.log(response);
         setEvents(response.data.events);
       } catch (error) {
         console.error(error);

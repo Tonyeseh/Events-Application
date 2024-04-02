@@ -55,7 +55,7 @@ const authLogin = async (req, res) => {
 
 const authRegister = async (req, res) => {
   const { firstName, lastName, email, password } = req.body;
-  console.log(firstName, lastName, email, password);
+
   if (!email || !password || !firstName || !lastName) {
     res.status(400).json({ error: "Invalid payload. Missing some fields" });
     return;

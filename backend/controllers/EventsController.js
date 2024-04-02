@@ -21,8 +21,6 @@ const getEvent = async (req, res) => {
 const newEvent = async (req, res) => {
   const { userEmail } = req;
 
-  console.log(userEmail);
-
   const user = await (
     await dbClient.usersCollection()
   ).findOne({ email: userEmail });
@@ -42,7 +40,6 @@ const newEvent = async (req, res) => {
     isPublished = false,
     tags,
   } = req.body;
-  console.log(req);
   if (
     !title &&
     !category &&
@@ -101,7 +98,6 @@ const getEvents = async (req, res) => {
     .find()
     .limit(6)
     .toArray();
-  console.log(queryString);
   res.json({ events: result });
 };
 
@@ -196,8 +192,6 @@ const addToInterested = async (req, res) => {
         userId: user._id,
         eventId: event._id,
       });
-
-      console.log(result);
     }
 
     res.status(200).json();

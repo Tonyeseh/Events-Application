@@ -41,7 +41,6 @@ const CreateEvent = () => {
       prevData.session = prevData.session.filter((element) => {
         return element.id.toString() !== id;
       });
-      console.log(prevData.session);
       return prevData;
     });
     setSessionChildren((prevData) => ({ ...prevData }));

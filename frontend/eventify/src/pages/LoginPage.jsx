@@ -6,9 +6,7 @@ import axios from "../api/axios";
 import useAuth from "../hooks/useAuth";
 
 function LoginPage() {
-  const { setAuth, auth } = useAuth();
-
-  console.log(auth);
+  const { setAuth } = useAuth();
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -30,7 +28,6 @@ function LoginPage() {
           withCredentials: true,
         }
       );
-      console.log(JSON.stringify(response?.data));
       const accessToken = response?.data?.accessToken;
       const user = response?.data?.user;
       setAuth({ user, accessToken });

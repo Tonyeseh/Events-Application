@@ -1,19 +1,64 @@
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import eventImg from "../../img/event_image.png";
+import { axiosPrivate } from "../../api/axios";
+import useAuth from "../../hooks/useAuth";
 
-const EventCard = () => {
+const EventCard = ({ event }) => {
+  const { auth } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [starred, setStarred] = useState(false);
+  const eventId = event._id;
+  const toggleStarred = async (e) => {
+    try {
+      if (!starred) {
+        const response = await axiosPrivate.get(
+          `/events/${eventId}/interested`,
+          {
+            headers: {
+              Authorization: `Bearer ${auth.accessToken}`,
+            },
+          }
+        );
+
+        if (response.status === 200) {
+          setStarred(true);
+        }
+      } else {
+        const response = await axiosPrivate.get(
+          `/events/${eventId}/uninterested`,
+          {
+            headers: {
+              Authorization: `Bearer ${auth.accessToken}`,
+            },
+          }
+        );
+
+        if (response.status === 200) {
+          setStarred(false);
+        }
+      }
+    } catch (error) {
+      if (error?.response.status === 401 || error?.response.status === 403) {
+        navigate("/login", { replace: true, state: { from: location } });
+      } else console.log(error);
+    }
+  };
+
   return (
     <div className='w-1/3 px-5 mb-10'>
       <div className='relative'>
-        <img className='w-full  rounded-t-lg' src={eventImg} alt='' />
+        <img className='w-full rounded-t-lg' src={eventImg} alt='' />
         <div className='h-8 w-8 rounded-full bg-white absolute top-2 right-2 flex justify-center'>
           <svg
             xmlns='http://www.w3.org/2000/svg'
-            fill='none'
+            fill={starred ? "#2b293d" : "none"}
             viewBox='0 0 24 24'
             strokeWidth={1.5}
-            stroke='currentColor'
+            stroke='#2b293d'
             className='w-6 h-6 block m-auto'
+            onClick={toggleStarred}
           >
             <path
               strokeLinecap='round'
@@ -23,22 +68,58 @@ const EventCard = () => {
           </svg>
         </div>
         <span className='p-1.5 bg-[#ffe047] absolute bottom-0 left-0 text-xs rounded-tr'>
-          Category
+          {event && event.category}
         </span>
       </div>
       <div className='flex justify-start mt-5'>
         <div className='text-center w-1/3'>
-          <p className='text-[#4539B4]'>NOV</p>
-          <p className='text-sm font-bold'>Day - Day</p>
+          <p className='text-[#4539B4] mb-3'>
+            {event &&
+              new Date(event.session[0].startDate).toLocaleString("en-us", {
+                month: "short",
+              })}
+          </p>
+          <p className='text-sm font-bold'>
+            {/* {event && event.session[0].endDate
+              ? `${new Date(event.session[0].startDate).toLocaleString(
+                  "en-us",
+                  {
+                    day: "numeric",
+                  }
+                )} - ${new Date(event.session[0].endDate).toLocaleString(
+                  "en-us",
+                  {
+                    day: "numeric",
+                  }
+                )}`
+              : new Date(event.session[0].startDate).toLocaleString("en-us", {
+                  day: "numeric",
+                })} */}
+            {event &&
+              `${new Date(event.session[0].startDate).toLocaleString("en-us", {
+                day: "numeric",
+              })}`}
+          </p>
         </div>
         <div className='pl-3 text-sm text-gray-700'>
           <h3 className='text-base font-semibold p-0.5'>
-            {" "}
-            This is the title of this event and I am checking the overflow
-            property
+            {event && event.title}
           </h3>
-          <p className='p-0.5 font-medium'>location</p>
-          <p className='p-0.5 font-thin'>time</p>
+          <p className='p-0.5 font-medium'>{event && event.location}</p>
+          <p className='p-0.5 font-thin'>
+            {event &&
+              `${new Date(
+                `${event.session[0].startDate}T${event.session[0].startTime}`
+              ).toLocaleTimeString("en-US", {
+                hour: "2-digit",
+                minute: "2-digit",
+              })} - ${new Date(
+                `${event.session[0].startDate}T${event.session[0].endTime}`
+              ).toLocaleTimeString("en-US", {
+                hour: "2-digit",
+                minute: "2-digit",
+              })}`}
+          </p>
           <div className='flex justify-start p-1 text-center'>
             <svg
               xmlns='http://www.w3.org/2000/svg'
@@ -53,7 +134,7 @@ const EventCard = () => {
               />
             </svg>
 
-            <p className='mx-1'>price</p>
+            <p className='mx-1'>{event && event.tickets[0].ticketPrice}</p>
             <svg
               xmlns='http://www.w3.org/2000/svg'
               viewBox='0 0 24 24'
@@ -71,6 +152,16 @@ const EventCard = () => {
           </div>
         </div>
       </div>
+      <Link to={`/events/${eventId}`}>
+        <p className='text-center'>
+          <button
+            className='text-[#2B293D] bg-[#ffe047] mt-5 px-7 py-2 rounded-lg text-center text-xs'
+            type='button'
+          >
+            See details
+          </button>
+        </p>
+      </Link>
     </div>
   );
 };

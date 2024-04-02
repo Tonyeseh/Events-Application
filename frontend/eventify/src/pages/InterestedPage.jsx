@@ -3,13 +3,19 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { axiosPrivate } from "../api/axios";
 import EventCard from "../components/Cards/EventCard";
+import useAuth from "../hooks/useAuth";
 
 const InterestedPage = () => {
+  const { auth } = useAuth();
   const [events, setEvents] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axiosPrivate("events");
+        const response = await axiosPrivate("/user/interested", {
+          headers: {
+            Authorization: `Bearer ${auth.accessToken}`,
+          },
+        });
         console.log(response);
         setEvents(response.data.events);
       } catch (error) {
@@ -18,7 +24,7 @@ const InterestedPage = () => {
     };
     fetchData();
     return (() => console.log("interested Page effect"))();
-  }, []);
+  }, [auth]);
   return (
     <>
       <Header />

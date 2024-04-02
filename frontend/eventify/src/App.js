@@ -12,21 +12,25 @@ import ReviewEvent from "./pages/ReviewEvent";
 import { FormProvider } from "./context/FormContext";
 import RequireAuth from "./components/RequireAuth";
 import PersistentLogin from "./components/PersistLogin";
+import InterestedPage from "./pages/InterestedPage";
 
 function App() {
   return (
     <>
       <Routes>
-        <Route path='/' element={<HomePage />} />
-        <Route path='events' exact element={<SearchPage />} />
-        <Route path='/events/:id' element={<EventPage />} />
-        <Route path='/login' element={<LoginPage />} />
-        <Route path='/register' element={<RegisterPage />} />
+        <Route element={<PersistentLogin />}>
+          <Route path='/' element={<HomePage />} />
+          <Route path='events' exact element={<SearchPage />} />
+          <Route path='/events/:eventId' element={<EventPage />} />
+          <Route path='/login' element={<LoginPage />} />
+          <Route path='/register' element={<RegisterPage />} />
+        </Route>
       </Routes>
       <FormProvider>
         <Routes>
           <Route element={<PersistentLogin />}>
             <Route element={<RequireAuth />}>
+              <Route path='/interested-events' element={<InterestedPage />} />
               <Route path='/create-event' element={<CreateEvent />} />
               <Route path='/create-event/banner' element={<EventBanner />} />
               <Route

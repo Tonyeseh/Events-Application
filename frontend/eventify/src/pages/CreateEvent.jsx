@@ -8,6 +8,7 @@ import SessionComponent from "../components/SessionInfo";
 
 const CreateEvent = () => {
   const { handleChange, data, setFormData } = UseFormContext();
+  const [errorMsg, setErrMsg] = useState("");
   const [sessionChildren, setSessionChildren] = useState({
     id: Math.random(100000),
     startTime: "",
@@ -23,13 +24,13 @@ const CreateEvent = () => {
     ) {
       setFormData((prevData) => {
         prevData.session.push(sessionChildren);
-        setSessionChildren({
-          id: Math.random(100000),
-          startTime: "",
-          startDate: "",
-          endTime: "",
-        });
         return prevData;
+      });
+      setSessionChildren({
+        id: Math.random(100000),
+        startTime: "",
+        startDate: "",
+        endTime: "",
       });
     }
   };
@@ -52,6 +53,21 @@ const CreateEvent = () => {
     });
   };
 
+  const validateForm = (e) => {
+    if (
+      !data.title ||
+      !data.category ||
+      !data.type ||
+      !data.session ||
+      !data.location ||
+      !data.description ||
+      data.description?.length < 20
+    ) {
+      e.preventDefault();
+    }
+    setErrMsg("Some fields have not been filled or filled incorrectly!");
+  };
+
   return (
     <div>
       <Header />
@@ -59,6 +75,29 @@ const CreateEvent = () => {
         <div className='mx-10 md:mx-24 text-[#2b293d]'>
           <h1 className='text-2xl font-extrabold'>Create a New Event</h1>
           <img className='w-full my-12' src={progress} alt='' />
+          {errorMsg && (
+            <div
+              className='w-2/3 mx-auto bg-red-100 border border-red-400 text-red-700 px-4 py-3 mb-5 rounded relative'
+              role='alert'
+            >
+              <strong className='font-bold'>Holy smokes!</strong>
+              <span className='block sm:inline'> {errorMsg}</span>
+              <span
+                onClick={() => setErrMsg("")}
+                className='absolute top-0 bottom-0 right-0 px-4 py-3'
+              >
+                <svg
+                  className='fill-current h-6 w-6 text-red-500'
+                  role='button'
+                  xmlns='http://www.w3.org/2000/svg'
+                  viewBox='0 0 20 20'
+                >
+                  <title>Close</title>
+                  <path d='M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z' />
+                </svg>
+              </span>
+            </div>
+          )}
           <div className='my-5'>
             <div className='flex gap-4'>
               <div className='w-1/4'></div>
@@ -254,6 +293,7 @@ const CreateEvent = () => {
               <button
                 className='bg-[#2b293d] text-white rounded-md py-2 px-5 font-bold'
                 type='button'
+                onClick={validateForm}
               >
                 Save & Continue
               </button>

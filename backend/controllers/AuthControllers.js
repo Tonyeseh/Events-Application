@@ -44,9 +44,9 @@ const authLogin = async (req, res) => {
       maxAge: 86400 * 1000,
     });
 
-    res
-      .status(200)
-      .json({ accessToken, email: user.email, id: user._id.toString() });
+    delete user.password;
+
+    res.status(200).json({ accessToken, user });
   } catch (error) {
     console.log(error);
     res.status(500).json("Internal Server Error!");
@@ -76,13 +76,21 @@ const authRegister = async (req, res) => {
       password: hashedPwd,
       firstName,
       lastName,
+      website: "",
+      company: "",
+      phoneNumber: "",
+      address: "",
+      profilePics: "",
+      country: "",
+      interestedEvents: [],
+      following: [],
+      eventRSVP: [],
+      interests: [],
     });
 
     const user = await (
       await dbClient.usersCollection()
     ).findOne({ _id: result.insertedId });
-
-    console.log();
 
     const accessToken = jwt.sign(
       { email: user.email },
@@ -106,9 +114,9 @@ const authRegister = async (req, res) => {
       maxAge: 86400 * 1000,
     });
 
-    res
-      .status(200)
-      .json({ accessToken, email: user.email, id: user._id.toString() });
+    delete user.password;
+
+    res.status(200).json({ accessToken, user });
   } catch (error) {
     res.status(500).json({ error: "Server Internal Error" });
     console.error(error);

@@ -32,7 +32,8 @@ function LoginPage() {
       );
       console.log(JSON.stringify(response?.data));
       const accessToken = response?.data?.accessToken;
-      setAuth({ email, id: response?.data?.id, accessToken });
+      const user = response?.data?.user;
+      setAuth({ user, accessToken });
       setEmail("");
       setPwd("");
       navigate(from, { replace: true });

@@ -27,7 +27,8 @@ function RegisterPage() {
       );
 
       const accessToken = response?.data?.accessToken;
-      setAuth({ email, password, accessToken });
+      const user = response?.data?.user;
+      setAuth({ user, accessToken });
       setEmail("");
       setFname("");
       setLname("");

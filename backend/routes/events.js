@@ -4,14 +4,37 @@ import { authenticate } from "../utils/auth";
 import upload from "../utils/upload";
 import verifyJWT from "../utils/verifyJWT";
 
-const eventRouter = Router()
-eventRouter.get('/events/:id', EventsController.getEvent)
-eventRouter.get('/events', EventsController.getEvents)
-eventRouter.post('', verifyJWT, upload.single('event_cover_img'), EventsController.newEvent)
-eventRouter.put('/events/:id', authenticate, EventsController.updateEvent)
-eventRouter.get('/:id/publish', authenticate, EventsController.publishEvent)
-eventRouter.get('/:id/unpublish', authenticate, EventsController.unpublishEvent)
-eventRouter.delete('/:id', authenticate, EventsController.deleteEvent)
+const eventRouter = Router();
+eventRouter.get("/:eventId", EventsController.getEvent);
+eventRouter.get("", EventsController.getEvents);
+eventRouter.post(
+  "",
+  verifyJWT,
+  upload.single("coverImg"),
+  EventsController.newEvent
+);
+eventRouter.put("/:eventId", authenticate, EventsController.updateEvent);
+eventRouter.get(
+  "/:eventId/publish",
+  authenticate,
+  EventsController.publishEvent
+);
+eventRouter.get(
+  "/:eventId/unpublish",
+  authenticate,
+  EventsController.unpublishEvent
+);
+eventRouter.delete("/:eventId", authenticate, EventsController.deleteEvent);
 
+eventRouter.get(
+  "/:eventId/interested",
+  verifyJWT,
+  EventsController.addToInterested
+);
+eventRouter.get(
+  "/:eventId/uninterested",
+  verifyJWT,
+  EventsController.removeFromInterested
+);
 
-export default eventRouter
+export default eventRouter;

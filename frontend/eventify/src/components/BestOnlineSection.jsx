@@ -1,17 +1,13 @@
 import React from "react";
 import EventCard from "./Cards/EventCard";
 
-const BestOnlineSection = () => {
+const BestOnlineSection = ({ events }) => {
   return (
     <div className='mx-20 my-32'>
       <h1 className='font-bold text-xl pb-6'>Discover Best of Online Events</h1>
       <div className='flex flex-wrap -mx-5 -mb-10'>
-        <EventCard />
-        <EventCard />
-        <EventCard />
-        <EventCard />
-        <EventCard />
-        <EventCard />
+        {events &&
+          events.map((event) => <EventCard key={event._id} event={event} />)}
       </div>
       <div className='flex justify-center mt-10'>
         <button

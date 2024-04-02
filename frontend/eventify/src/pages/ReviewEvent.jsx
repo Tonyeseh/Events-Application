@@ -1,31 +1,29 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import progress from "../img/review-progress.png";
 import UseFormContext from "../hooks/UseFormContext";
 import eventImage from "../img/event_image.png";
+import useAxiosPrivate from "../hooks/useAxiosPrivate";
 
 const ReviewEvent = () => {
   const { data } = UseFormContext();
-  const img = data.cover_img ? URL.createObjectURL(data.cover_img) : eventImage;
+  const axiosPrivate = useAxiosPrivate();
+  const navigate = useNavigate();
+  const img = data.coverImg ? URL.createObjectURL(data.coverImg) : eventImage;
 
   const saveForLater = async (e) => {
     e.preventDefault();
+
     try {
-      const result = await fetch("http://localhost:5000/events", {
-        method: "post",
-        headers: {
-          "X-Token": "token",
-          "Content-Type": "multipart/form-data",
-        },
-        body: JSON.stringify(data),
+      const result = await axiosPrivate.post("/events", data, {
+        headers: { "Content-Type": "multipart/form-data" },
       });
 
       if (!result.ok) {
-        console.log(result);
+        navigate(`/events/${result.data.id}`);
       }
-      const jsonData = await result.json();
-      console.log(jsonData);
     } catch (error) {
       console.log("Network Error!", error);
     }
@@ -35,20 +33,17 @@ const ReviewEvent = () => {
     e.preventDefault();
 
     try {
-      const result = await fetch("http://localhost:5000/events", {
-        method: "post",
-        headers: {
-          "X-Token": "token",
-          "Content-Type": "multipart/form-data",
-        },
-        body: JSON.stringify(data),
-      });
+      const result = await axiosPrivate.post(
+        "/events",
+        { ...data, isPublished: true },
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+        }
+      );
 
       if (!result.ok) {
-        console.log(result);
+        navigate(`/events/${result.data.id}`);
       }
-      const jsonData = await result.json();
-      console.log(jsonData);
     } catch (error) {
       console.log("Network Error!", error);
     }

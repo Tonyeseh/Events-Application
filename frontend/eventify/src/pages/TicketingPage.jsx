@@ -56,10 +56,10 @@ const TicketingPage = () => {
                 <input
                   type='radio'
                   id='free'
-                  name='ticket_type'
+                  name='ticketType'
                   value='free'
                   className='hidden peer'
-                  checked={data.ticket_type === "free"}
+                  checked={data.ticketType === "free"}
                   onChange={handleChange}
                   required
                 />
@@ -79,10 +79,10 @@ const TicketingPage = () => {
                 <input
                   type='radio'
                   id='ticketed'
-                  name='ticket_type'
+                  name='ticketType'
                   value='ticketed'
                   className='hidden peer'
-                  checked={data.ticket_type === "ticketed"}
+                  checked={data.ticketType === "ticketed"}
                   onChange={handleChange}
                 />
                 <label

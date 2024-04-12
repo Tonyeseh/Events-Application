@@ -14,6 +14,7 @@ const CreateEvent = () => {
     startTime: "",
     startDate: "",
     endTime: "",
+    endDate: "",
   });
 
   const addSession = (e) => {
@@ -31,6 +32,7 @@ const CreateEvent = () => {
         startTime: "",
         startDate: "",
         endTime: "",
+        endDate: "",
       });
     }
   };
@@ -169,6 +171,26 @@ const CreateEvent = () => {
                 </label>
               </div>
             </div>
+            {data.type === "recurring" && (
+              <div className='flex justify-around my-3 gap-4'>
+                <label className='text-sm w-1/4 text-right' htmlFor='frequency'>
+                  Frequency<span className='text-red-500'>*</span>
+                </label>
+                <select
+                  className='p-2 bg-white border border-[#8282827e] rounded-md mb-5 w-full focus:outline-none focus:ring focus:border-[#2b293d] placeholder:text-[#8282827e] placeholder:text-sm'
+                  name='frequency'
+                  id='frequency'
+                  onChange={handleChange}
+                  defaultValue={data.frequency}
+                >
+                  <option value=''>Please select one</option>
+                  <option value='Daily'>Daily</option>
+                  <option value='Weekly'>Weekly</option>
+                  <option value='Monthly'>Monthly</option>
+                  <option value='Yearly'>Yearly</option>
+                </select>
+              </div>
+            )}
             <div className='flex justify-around my-5 gap-4'>
               <label className='text-sm w-1/4 text-right' htmlFor=''>
                 Session(s)<span className='text-red-500'>*</span>
@@ -190,6 +212,20 @@ const CreateEvent = () => {
                       value={sessionChildren.startDate}
                     />
                   </div>
+                  {data.type === "recurring" && (
+                    <div className='flex flex-col w-1/4'>
+                      <label htmlFor='endDate'>
+                        End Date<span className='text-red-500'>*</span>
+                      </label>
+                      <input
+                        type='date'
+                        name='endDate'
+                        id='endDate'
+                        onChange={handleSessionChange}
+                        value={sessionChildren.endDate}
+                      />
+                    </div>
+                  )}
                   <div className='flex flex-col w-1/4'>
                     <label htmlFor='startTime'>
                       Start Time<span className='text-red-500'>*</span>
@@ -238,6 +274,7 @@ const CreateEvent = () => {
                       key={session.id}
                       session={session}
                       removeSession={removeSession}
+                      type={data.type}
                     />
                   );
                 })}
@@ -249,21 +286,71 @@ const CreateEvent = () => {
               <div className='w-1/4'></div>
               <h3 className='text-xl font-thin w-full'>Location</h3>
             </div>
-            <div className='flex justify-around my-3 gap-4'>
-              <label className='text-sm w-1/4 text-right' htmlFor='location'>
-                Where will your event take place?
-                <span className='text-red-500'>*</span>
-              </label>
-              <input
-                className='p-2 border border-[#8282827e] rounded-md mb-5 w-full focus:outline-none focus:ring focus:border-[#2b293d] placeholder:text-[#8282827e] placeholder:text-sm'
-                type='text'
-                id='location'
-                placeholder='Enter a location...'
-                name='location'
-                onChange={handleChange}
-                value={data.location}
-              />
+            <div className='flex justify-around my-5 gap-4'>
+              <div className='text-sm w-1/4 text-right'>
+                Event Type<span className='text-red-500'>*</span>
+              </div>
+              <div className='w-full'>
+                <input
+                  className='mr-3 text-[#2b293d] border-[#2b293d] focus:ring-[#2b293d] bg-[#2b293d]'
+                  type='radio'
+                  id='physical'
+                  value='physical'
+                  name='location'
+                  checked={data.location === "physical"}
+                  onChange={handleChange}
+                />
+                <label className='text-sm font-bold mr-7' htmlFor='physical'>
+                  Physical Event
+                </label>
+                <input
+                  className='mr-3 text-[#2b293d] border-[#2b293d] focus:ring-[#2b293d] bg-[#2b293d]'
+                  type='radio'
+                  id='online'
+                  value='online'
+                  name='location'
+                  checked={data.location === "online"}
+                  onChange={handleChange}
+                />
+                <label className='text-sm font-bold mr-7' htmlFor='online'>
+                  Online Event
+                </label>
+              </div>
             </div>
+            {data.location && data.location === "physical" && (
+              <div className='flex justify-around my-3 gap-4'>
+                <label className='text-sm w-1/4 text-right' htmlFor='address'>
+                  Where will your event take place?
+                  <span className='text-red-500'>*</span>
+                </label>
+                <input
+                  className='p-2 border border-[#8282827e] rounded-md mb-5 w-full focus:outline-none focus:ring focus:border-[#2b293d] placeholder:text-[#8282827e] placeholder:text-sm'
+                  type='text'
+                  id='address'
+                  placeholder='Enter an address...'
+                  name='address'
+                  onChange={handleChange}
+                  value={data.address}
+                />
+              </div>
+            )}
+            {data.location && data.location === "online" && (
+              <div className='flex justify-around my-3 gap-4'>
+                <label className='text-sm w-1/4 text-right' htmlFor='address'>
+                  Event Link
+                  <span className='text-red-500'>*</span>
+                </label>
+                <input
+                  className='p-2 border border-[#8282827e] rounded-md mb-5 w-full focus:outline-none focus:ring focus:border-[#2b293d] placeholder:text-[#8282827e] placeholder:text-sm'
+                  type='text'
+                  id='address'
+                  placeholder='Enter a meeting link...'
+                  name='address'
+                  onChange={handleChange}
+                  value={data.address}
+                />
+              </div>
+            )}
           </div>
           <div className='my-5'>
             <div className='flex gap-4'>

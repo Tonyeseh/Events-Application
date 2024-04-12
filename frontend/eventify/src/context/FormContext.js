@@ -14,6 +14,7 @@ export const FormProvider = ({ children }) => {
     title: "",
     category: "",
     type: "",
+    frequency: "",
     session: [],
     location: "",
     description: "",

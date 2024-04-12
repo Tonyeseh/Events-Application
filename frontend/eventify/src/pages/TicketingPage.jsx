@@ -55,17 +55,17 @@ const TicketingPage = () => {
               <li className='md:max-w-xs'>
                 <input
                   type='radio'
-                  id='free'
+                  id='ticketed'
                   name='ticketType'
-                  value='free'
+                  value='ticketed'
                   className='hidden peer'
-                  checked={data.ticketType === "free"}
+                  checked={data.ticketType === "ticketed"}
                   onChange={handleChange}
                   required
                 />
                 <label
-                  htmlFor='free'
-                  className='flex flex-wrap items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-[#2b293d] peer-checked:text-[#2b293d] hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700'
+                  htmlFor='ticketed'
+                  className='flex flex-wrap items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer peer-checked:border-[#2b293d] peer-checked:text-[#2b293d] hover:text-gray-600 hover:bg-gray-100'
                 >
                   {" "}
                   <img className='m-auto w-50' src={ticketSVG} alt='' />
@@ -78,16 +78,16 @@ const TicketingPage = () => {
               <li className='md:max-w-xs'>
                 <input
                   type='radio'
-                  id='ticketed'
+                  id='free'
                   name='ticketType'
-                  value='ticketed'
+                  value='free'
                   className='hidden peer'
-                  checked={data.ticketType === "ticketed"}
+                  checked={data.ticketType === "free"}
                   onChange={handleChange}
                 />
                 <label
-                  htmlFor='ticketed'
-                  className='flex flex-wrap items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-[#2b293d] peer-checked:text-[#2b293d] hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700'
+                  htmlFor='free'
+                  className='flex flex-wrap items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer peer-checked:border-[#2b293d] peer-checked:text-[#2b293d] hover:text-gray-600 hover:bg-gray-100'
                 >
                   <img className='m-auto' src={freeSVG} alt='' />
                   <h3 className='block w-full text-center'>Free Event</h3>
@@ -116,6 +116,7 @@ const TicketingPage = () => {
                     name='ticketName'
                     value={ticketData.ticketName}
                     onChange={handleTicketChange}
+                    disabled={data.ticketType === "free"}
                   />
                 </div>
               </div>
@@ -132,6 +133,7 @@ const TicketingPage = () => {
                     name='ticketPrice'
                     value={ticketData.ticketPrice}
                     onChange={handleTicketChange}
+                    disabled={data.ticketType === "free"}
                   />
                 </div>
               </div>

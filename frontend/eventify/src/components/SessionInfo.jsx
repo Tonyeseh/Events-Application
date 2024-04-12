@@ -10,6 +10,12 @@ const SessionComponent = ({ removeSession, session }) => {
         <label htmlFor=''>Start Date</label>
         <p>{session.startDate}</p>
       </div>
+      {session.endDate && (
+        <div className='flex flex-col w-1/4'>
+          <label htmlFor=''>End Date</label>
+          <p>{session.endDate}</p>
+        </div>
+      )}
       <div className='flex flex-col w-1/4'>
         <label htmlFor=''>Start Time</label>
         <p>{session.startTime}</p>

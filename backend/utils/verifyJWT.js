@@ -1,5 +1,5 @@
 import { config } from "dotenv";
-import jwt from "jsonwebtoken";
+import jwt, { decode } from "jsonwebtoken";
 
 config();
 
@@ -12,7 +12,7 @@ const verifyJWT = (req, res, next) => {
   }
   const token = authHeader.split(" ")[1];
   jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
-    console.log(err);
+    if (err) console.log(true);
     if (err) return res.status(403).json({ error: "Forbidden" });
     req.userEmail = decoded.email;
     next();

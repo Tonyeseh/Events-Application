@@ -71,7 +71,6 @@ const newEvent = async (req, res) => {
       type,
       session,
       location,
-      link,
       address,
       description,
       ticketType,

@@ -1,11 +1,12 @@
 import { createClient } from 'redis';
+import { inspect } from "util";
 
 class RedisClient {
   constructor() {
     this.client = createClient();
     this.isConnected = true;
     this.client.on('error', (error) => {
-      console.log(`Connection failed: ${error}`);
+      console.log(`Connection failed: ${inspect(error)}`);
       this.isConnected = false;
     });
     (async () => await this.client.connect())()

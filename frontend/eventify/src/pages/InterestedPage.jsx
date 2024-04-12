@@ -27,10 +27,10 @@ const InterestedPage = () => {
   return (
     <>
       <Header />
-      <div className='my-10'>
-        <div className='mx-10 md:mx-24 text-[#2B293D]'>
-          <h1 className='text-2xl font-extrabold mb-7'>Interested Events</h1>
-          <div className='flex flex-wrap -mx-5 -mb-10'>
+      <div className="my-10">
+        <div className="mx-10 md:mx-24 text-[#2B293D]">
+          <h1 className="text-2xl font-extrabold mb-7">Interested Events</h1>
+          <div className="flex flex-wrap -mx-5 -mb-10">
             {events &&
               events.map((event) => (
                 <EventCard key={event._id} event={event} />

@@ -2,10 +2,15 @@ import useAuth from "../hooks/useAuth";
 import logo from "../img/logo.png";
 import axios from "../api/axios";
 import { Link, NavLink, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { Popover } from "./popover/popover";
 
 const Header = () => {
   const { auth, setAuth } = useAuth();
   const navigate = useNavigate();
+
+  const [profileRef, setProfileRef] = useState(null);
+  const [isOpen, setIsOpen] = useState(false);
 
   const logout = async () => {
     setAuth({});
@@ -116,7 +121,11 @@ const Header = () => {
           </Link>
         )}
         {auth.user && (
-          <li className="p-3 text-sm flex items-center">
+          <li
+            className="p-3 text-sm flex items-center cursor-pointer"
+            ref={setProfileRef}
+            onClick={() => setIsOpen((s) => !s)}
+          >
             <div className="text-sm flex flex-col items-center">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -134,9 +143,50 @@ const Header = () => {
               </svg>
               Profile
             </div>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="w-2 h-2"
+            >
+              <path d="M11.178 19.569a.998.998 0 0 0 1.644 0l9-13A.999.999 0 0 0 21 5H3a1.002 1.002 0 0 0-.822 1.569l9 13z"></path>
+            </svg>
+            <Popover
+              reference={profileRef}
+              isOpen={isOpen}
+              onClose={() => setIsOpen(false)}
+            >
+              <li>
+                <Link
+                  to="/"
+                  className="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-[#ffe047] hover:bg-gray-50"
+                >
+                  Interests
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/"
+                  className="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-[#ffe047] hover:bg-gray-50"
+                >
+                  Account Settings
+                </Link>
+              </li>
+              <li>
+                <div
+                  role="menuitem"
+                  className="flex items-center text-[13px] py-1.5 px-4 text-gray-600 hover:text-[#ffe047] hover:bg-gray-50 cursor-pointer"
+                  onClick={logout}
+                >
+                  Log Out
+                </div>
+              </li>
+            </Popover>
           </li>
         )}
-        {auth.user && (
+        {/* {auth.user && (
           <li
             className="p-3 text-sm flex flex-col items-center"
             onClick={logout}
@@ -157,7 +207,7 @@ const Header = () => {
             </svg>
             Logout
           </li>
-        )}
+        )} */}
       </ul>
       <div className="block md:hidden">
         <svg

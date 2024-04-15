@@ -8,8 +8,10 @@ import NewsLetterSection from "../components/NewLetterSection";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import axios from "../api/axios";
+import useAuth from "../hooks/useAuth";
 
 function HomePage() {
+  const { auth } = useAuth();
   const [data, setData] = useState({
     locationSection: "",
     onlineSection: "",
@@ -18,21 +20,53 @@ function HomePage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const eventInLocation = await axios("/events?location=NG");
-        const onlineSection = await axios("/events?location=online");
-        const trendingSection = await axios("/events?trending=true");
-        setData({
-          locationSection: eventInLocation.data.events,
-          onlineSection: onlineSection.data.events,
-          trendingSection: trendingSection.data.events,
-        });
+        if (auth.user) {
+          const eventInLocation = await axios("/events?location=NG", {
+            headers: {
+              Authorization: `Bearer ${auth.accessToken}`,
+            },
+          });
+          const onlineSection = await axios("/events?location=online", {
+            headers: {
+              Authorization: `Bearer ${auth.accessToken}`,
+            },
+          });
+          const trendingSection = await axios(
+            "/events?trending=true",
+            {
+              headers: {
+                Authorization: `Bearer ${auth.accessToken}`,
+              },
+            },
+            {
+              headers: {
+                Authorization: `Bearer ${auth.accessToken}`,
+              },
+            }
+          );
+          console.log(eventInLocation);
+          setData({
+            locationSection: eventInLocation.data.events,
+            onlineSection: onlineSection.data.events,
+            trendingSection: trendingSection.data.events,
+          });
+        } else {
+          const eventInLocation = await axios("/events?location=NG");
+          const onlineSection = await axios("/events?location=online");
+          const trendingSection = await axios("/events?trending=true");
+          setData({
+            locationSection: eventInLocation.data.events,
+            onlineSection: onlineSection.data.events,
+            trendingSection: trendingSection.data.events,
+          });
+        }
       } catch (error) {
         console.error(error);
       }
     };
     fetchData();
     return (() => console.log("homepage effect"))();
-  }, []);
+  }, [auth.accessToken, auth.user]);
   return (
     <div>
       <Header />

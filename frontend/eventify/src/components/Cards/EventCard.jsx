@@ -5,13 +5,17 @@ import { axiosPrivate } from "../../api/axios";
 import useAuth from "../../hooks/useAuth";
 
 const EventCard = ({ event }) => {
-  console.log(event);
   const { auth } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-  const [starred, setStarred] = useState(false);
+  const [starred, setStarred] = useState(
+    event && event.interested ? true : false
+  );
+
   const eventId = event._id;
+
   const toggleStarred = async (e) => {
+    e.preventDefault();
     try {
       if (!starred) {
         const response = await axiosPrivate.get(
@@ -70,7 +74,7 @@ const EventCard = ({ event }) => {
             />
           </svg>
         </div>
-        <span className="p-1.5 bg-[#ffe047] absolute bottom-0 left-0 text-xs rounded-tr">
+        <span className="p-1.5 w-1/2 bg-[#ffe047] absolute bottom-0 left-0 text-xs rounded-tr">
           {event && event.category}
         </span>
       </div>

@@ -57,13 +57,14 @@ const EventPage = () => {
   useEffect(() => {
     const fetchEvent = async () => {
       try {
-        const result = await axios.get(`/events/${eventId}`);
+        const result = await axios.get(`/events/${eventId}`, {
+          headers: {
+            Authorization: `Bearer ${auth.accessToken}`,
+          },
+        });
+        console.log(result.data);
         if (result.status === 200) {
-          if (
-            auth.user &&
-            auth.user.interestedEvents &&
-            auth.user.interestedEvents.includes(eventId)
-          ) {
+          if (result.data.interested) {
             setStarred(true);
           }
           setEventData(result.data);
@@ -78,7 +79,7 @@ const EventPage = () => {
     return (() => {
       console.log("ran effect");
     })();
-  }, [eventId, auth.user]);
+  }, [eventId, auth.accessToken]);
 
   return (
     <div>

@@ -1,6 +1,16 @@
 import { ObjectId } from "mongodb";
 import dbClient from "../utils/db";
 
+const addCount = async (events) => {
+  for (let e of events) {
+    const interestCount = await (
+      await dbClient.interestedCollection()
+    ).countDocuments({ eventId: e._id });
+    e.interestCount = interestCount;
+  }
+  return events;
+};
+
 const getEvent = async (req, res) => {
   const { eventId } = req.params;
   const { user } = req;
@@ -12,12 +22,11 @@ const getEvent = async (req, res) => {
 
     if (!event) return res.status(404).json({ error: "Event not Found" });
 
-    console.log("user =>", user);
-
     if (
-      await (
+      user &&
+      (await (
         await dbClient.interestedCollection()
-      ).findOne({ userId: user._id, eventId: event._id })
+      ).findOne({ userId: user._id, eventId: event._id }))
     )
       return res.json({ ...event, interested: true });
 
@@ -102,6 +111,11 @@ const updateEvent = async (req, res) => {
 };
 
 const getEvents = async (req, res) => {
+  const { location } = req.query;
+  console.log(location);
+
+  const query = location && location === "online" ? { location } : {};
+
   let userInterests = [];
   try {
     if (req.user) {
@@ -111,12 +125,16 @@ const getEvents = async (req, res) => {
     }
     userInterests = userInterests.map((e) => e.eventId.toString());
     const result = await (await dbClient.eventsCollection())
-      .find()
+      .find(query)
       .limit(6)
       .toArray();
-    const events = result.map((e) =>
-      userInterests.includes(e._id.toString()) ? { ...e, interested: true } : e
-    );
+
+    const ev = await addCount(result);
+    const events = ev.map((e) => {
+      return userInterests.includes(e._id.toString())
+        ? { ...e, interested: true }
+        : { ...e };
+    });
     return res.send({ events });
   } catch (error) {
     console.log(error);

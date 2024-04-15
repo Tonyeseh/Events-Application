@@ -164,7 +164,7 @@ const EventCard = ({ event }) => {
                   clipRule="evenodd"
                 />
               </svg>
-              <p className="">5 interested</p>
+              <p className="">{event.interestCount || 0} interested</p>
             </div>
           </div>
         </div>

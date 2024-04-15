@@ -3,10 +3,11 @@ import EventsController from "../controllers/EventsController";
 import { authenticate } from "../utils/auth";
 import upload from "../utils/upload";
 import verifyJWT from "../utils/verifyJWT";
+import getUser from "../utils/getUser";
 
 const eventRouter = Router();
-eventRouter.get("/:eventId", EventsController.getEvent);
-eventRouter.get("", EventsController.getEvents);
+eventRouter.get("/:eventId", getUser, EventsController.getEvent);
+eventRouter.get("", getUser, EventsController.getEvents);
 eventRouter.post(
   "",
   verifyJWT,

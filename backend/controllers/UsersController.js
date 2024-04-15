@@ -36,8 +36,7 @@ export default class UsersController {
           const event = await (
             await dbClient.eventsCollection()
           ).findOne({ _id: element.eventId });
-
-          return event;
+          return { ...event, interested: true };
         })
       );
       res.json({ events });

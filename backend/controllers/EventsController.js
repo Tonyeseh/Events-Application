@@ -3,6 +3,7 @@ import dbClient from "../utils/db";
 
 const getEvent = async (req, res) => {
   const { eventId } = req.params;
+  const { user } = req;
 
   try {
     const event = await (
@@ -10,6 +11,15 @@ const getEvent = async (req, res) => {
     ).findOne({ _id: new ObjectId(eventId) });
 
     if (!event) return res.status(404).json({ error: "Event not Found" });
+
+    console.log("user =>", user);
+
+    if (
+      await (
+        await dbClient.interestedCollection()
+      ).findOne({ userId: user._id, eventId: event._id })
+    )
+      return res.json({ ...event, interested: true });
 
     return res.json(event);
   } catch (error) {
@@ -92,12 +102,26 @@ const updateEvent = async (req, res) => {
 };
 
 const getEvents = async (req, res) => {
-  const queryString = req.query;
-  const result = await (await dbClient.eventsCollection())
-    .find()
-    .limit(6)
-    .toArray();
-  res.json({ events: result });
+  let userInterests = [];
+  try {
+    if (req.user) {
+      userInterests = await (await dbClient.interestedCollection())
+        .find({ userId: req.user._id })
+        .toArray();
+    }
+    userInterests = userInterests.map((e) => e.eventId.toString());
+    const result = await (await dbClient.eventsCollection())
+      .find()
+      .limit(6)
+      .toArray();
+    const events = result.map((e) =>
+      userInterests.includes(e._id.toString()) ? { ...e, interested: true } : e
+    );
+    return res.send({ events });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ error: "Internal Server Error" });
+  }
 };
 
 const deleteEvent = async (req, res) => {

@@ -94,7 +94,7 @@ const newEvent = async (req, res) => {
       description,
       ticketType,
       tickets,
-      isPublished,
+      isPublished: isPublished ? true : isPublished,
       tags,
       coverImg,
       userId: user._id,
@@ -112,7 +112,8 @@ const updateEvent = async (req, res) => {
 
 const getEvents = async (req, res) => {
   const { location } = req.query;
-  console.log(location);
+
+  const subQuery = { isPublished: true };
 
   const query = location && location === "online" ? { location } : {};
 
@@ -124,10 +125,14 @@ const getEvents = async (req, res) => {
         .toArray();
     }
     userInterests = userInterests.map((e) => e.eventId.toString());
-    const result = await (await dbClient.eventsCollection())
-      .find(query)
+    const result = await (
+      await dbClient.eventsCollection()
+    )
+      .find({ ...query, ...subQuery })
       .limit(6)
       .toArray();
+
+    console.log(result);
 
     const ev = await addCount(result);
     const events = ev.map((e) => {

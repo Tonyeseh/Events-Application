@@ -13,31 +13,33 @@ import { FormProvider } from "./context/FormContext";
 import RequireAuth from "./components/RequireAuth";
 import PersistentLogin from "./components/PersistLogin";
 import InterestedPage from "./pages/InterestedPage";
+import UserEventPage from "./pages/UserEvents";
 
 function App() {
   return (
     <>
       <Routes>
         <Route element={<PersistentLogin />}>
-          <Route path='/' element={<HomePage />} />
-          <Route path='events' exact element={<SearchPage />} />
-          <Route path='/events/:eventId' element={<EventPage />} />
-          <Route path='/login' element={<LoginPage />} />
-          <Route path='/register' element={<RegisterPage />} />
+          <Route path="/" element={<HomePage />} />
+          <Route path="events" exact element={<SearchPage />} />
+          <Route path="/events/:eventId" element={<EventPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
         </Route>
       </Routes>
       <FormProvider>
         <Routes>
           <Route element={<PersistentLogin />}>
             <Route element={<RequireAuth />}>
-              <Route path='/interested-events' element={<InterestedPage />} />
-              <Route path='/create-event' element={<CreateEvent />} />
-              <Route path='/create-event/banner' element={<EventBanner />} />
+              <Route path="/interested-events" element={<InterestedPage />} />
+              <Route path="/create-event" element={<CreateEvent />} />
+              <Route path="/create-event/banner" element={<EventBanner />} />
               <Route
-                path='/create-event/ticketing'
+                path="/create-event/ticketing"
                 element={<TicketingPage />}
               />
-              <Route path='/create-event/review' element={<ReviewEvent />} />
+              <Route path="/create-event/review" element={<ReviewEvent />} />
+              <Route path="/myevents" element={<UserEventPage />} />
             </Route>
           </Route>
         </Routes>

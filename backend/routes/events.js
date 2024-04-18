@@ -25,7 +25,7 @@ eventRouter.get(
   authenticate,
   EventsController.unpublishEvent
 );
-eventRouter.delete("/:eventId", authenticate, EventsController.deleteEvent);
+eventRouter.delete("/:eventId", verifyJWT, EventsController.deleteEvent);
 
 eventRouter.get(
   "/:eventId/interested",

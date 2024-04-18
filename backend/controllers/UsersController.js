@@ -47,4 +47,23 @@ export default class UsersController {
       res.status(500).json({ error: "Something went wrong!" });
     }
   }
+
+  static async getUserEvents(req, res) {
+    const { userEmail } = req;
+    if (!userEmail) return res.status(403).json({ error: "Forbidden" });
+
+    try {
+      const user = await (
+        await dbClient.usersCollection()
+      ).findOne({ email: userEmail });
+      if (!user) return res.status(403).json({ error: "Forbidden" });
+      const userEvents = await (await dbClient.eventsCollection())
+        .find({ userId: user._id })
+        .toArray();
+
+      return res.json({ events: userEvents });
+    } catch (error) {
+      res.status(500).json({ error: "Something went wrong!" });
+    }
+  }
 }

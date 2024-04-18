@@ -148,12 +148,12 @@ const getEvents = async (req, res) => {
 };
 
 const deleteEvent = async (req, res) => {
-  const eventId = req.params.id;
+  const { eventId } = req.params;
 
   try {
     const event = await (
       await dbClient.eventsCollection()
-    ).findOne({ _id: ObjectId(eventId) });
+    ).findOne({ _id: new ObjectId(eventId) });
     if (!event) {
       res.status(404).json({ error: "Event not Found" });
       return;

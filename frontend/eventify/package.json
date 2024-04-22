@@ -9,10 +9,7 @@
     "axios": "^1.6.8",
     "base-64": "^1.0.0",
     "flowbite": "^2.3.0",
-<<<<<<< HEAD
     "flowbite-react": "^0.9.0",
-=======
->>>>>>> 2570824 (updated dependencies)
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-popper": "^2.3.0",

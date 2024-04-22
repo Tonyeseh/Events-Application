@@ -30,9 +30,9 @@ const CreateEvent = () => {
       });
       setSessionChildren({
         id: Math.random(100000),
-        startTime: "",
-        startDate: "",
-        endTime: "",
+        startTime: "00:00",
+        startDate: new Date(),
+        endTime: "00:00",
         endDate: "",
       });
     }

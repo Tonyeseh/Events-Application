@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useNavigate, useLocation, Link } from "react-router-dom";
-import eventImg from "../../img/event_image.png";
 import { axiosPrivate } from "../../api/axios";
 import useAuth from "../../hooks/useAuth";
 
@@ -55,7 +54,11 @@ const EventCard = ({ event }) => {
     <div className="w-1/3 px-5 mb-10">
       <div className="relative">
         <Link to={`/events/${eventId}`}>
-          <img className="w-full rounded-t-lg" src={eventImg} alt="" />
+          <img
+            className="w-full rounded-t-lg"
+            src={`http://localhost:5000/${event.coverImg}`}
+            alt=""
+          />
         </Link>
         <div className="h-8 w-8 rounded-full bg-white absolute top-2 right-2 flex justify-center">
           <svg

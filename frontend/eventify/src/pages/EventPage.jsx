@@ -92,7 +92,7 @@ const EventPage = () => {
             <div className="my-7 mx-7 md:mx-20 text-[#2B293D] border-b">
               <img
                 className="w-full h-20 md:h-96 rounded-xl"
-                src={eventImg}
+                src={`http://localhost:5000/${eventData.coverImg}`}
                 alt=""
               />
               <div className="my-7 flex justify-between">

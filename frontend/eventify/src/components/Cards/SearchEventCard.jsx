@@ -81,7 +81,7 @@ const SearchEventCard = ({ event }) => {
               <p className="mx-1">
                 {event.ticketType === "free"
                   ? "Free"
-                  : event.tickets[0].ticketPrice}
+                  : `$${event.tickets[0].ticketPrice}`}
               </p>
             </div>
           </div>

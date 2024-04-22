@@ -15,7 +15,6 @@ const EventPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [eventData, setEventData] = useState({});
   const [starred, setStarred] = useState(false);
-  // const [coverImg, setCoverImg] = useState(eventImg);
 
   const toggleStarred = async (e) => {
     try {

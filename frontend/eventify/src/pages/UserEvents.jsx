@@ -12,7 +12,6 @@ const UserEventPage = () => {
 
   const handleDelete = async (e, eventId) => {
     e.preventDefault();
-    console.log(eventId);
 
     try {
       const response = await axiosPrivate.delete(`/events/${eventId}`, {
@@ -23,7 +22,6 @@ const UserEventPage = () => {
       if (response.status === 200) {
         setEvents((events) => events.filter((e) => e._id !== eventId));
       }
-      console.log(events);
     } catch (error) {
       console.log(error);
     }
@@ -74,7 +72,7 @@ const UserEventPage = () => {
                         className="flex items-center justify-center px-4 py-2.5 text-sm font-medium text-white rounded-lg bg-[#2b293de0] hover:bg-[#2b293d] focus:ring-4 focus:ring-primary-300"
                       >
                         <svg
-                          className="h-3.5 w-3.5 mr-2"
+                          className="h-5 w-5 mr-2"
                           fill="currentColor"
                           viewbox="0 0 20 20"
                           xmlns="http://www.w3.org/2000/svg"

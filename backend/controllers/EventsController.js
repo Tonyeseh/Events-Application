@@ -132,8 +132,6 @@ const getEvents = async (req, res) => {
       .limit(6)
       .toArray();
 
-    console.log(result);
-
     const ev = await addCount(result);
     const events = ev.map((e) => {
       return userInterests.includes(e._id.toString())

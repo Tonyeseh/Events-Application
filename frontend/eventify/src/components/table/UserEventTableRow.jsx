@@ -33,24 +33,31 @@ const UserEventTableRow = ({ event, handleDelete }) => {
             : "Published"}
         </div>
       </td>
-      <td className="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">
-        1
+      <td className="px-4 py-2 font-medium text-gray-900 whitespace-nowrap text-center">
+        {event.interestCount}
       </td>
       <td className="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">
-        day
+        {event.session && event.session[0].startDate}
       </td>
-      <td className="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">
+      <td className="px-4 py-2 font-medium text-gray-700 whitespace-nowrap">
         <div className="flex items-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            viewbox="0 0 24 24"
-            fill="currentColor"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
             className="w-5 h-5 mr-2 text-gray-400"
-            aria-hidden="true"
           >
-            <path d="M2.25 2.25a.75.75 0 000 1.5h1.386c.17 0 .318.114.362.278l2.558 9.592a3.752 3.752 0 00-2.806 3.63c0 .414.336.75.75.75h15.75a.75.75 0 000-1.5H5.378A2.25 2.25 0 017.5 15h11.218a.75.75 0 00.674-.421 60.358 60.358 0 002.96-7.228.75.75 0 00-.525-.965A60.864 60.864 0 005.68 4.509l-.232-.867A1.875 1.875 0 003.636 2.25H2.25zM3.75 20.25a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0zM16.5 20.25a1.5 1.5 0 113 0 1.5 1.5 0 01-3 0z" />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M16.5 6v.75m0 3v.75m0 3v.75m0 3V18m-9-5.25h5.25M7.5 15h3M3.375 5.25c-.621 0-1.125.504-1.125 1.125v3.026a2.999 2.999 0 0 1 0 5.198v3.026c0 .621.504 1.125 1.125 1.125h17.25c.621 0 1.125-.504 1.125-1.125v-3.026a2.999 2.999 0 0 1 0-5.198V6.375c0-.621-.504-1.125-1.125-1.125H3.375Z"
+            />
           </svg>
-          1.6M
+          {event.tickets
+            ? `$${event.tickets[event.tickets.length - 1].ticketPrice}`
+            : "$0"}
         </div>
       </td>
       <td className="px-4 py-2">$3.2M</td>

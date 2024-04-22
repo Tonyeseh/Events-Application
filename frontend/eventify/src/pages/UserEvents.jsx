@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { axiosPrivate } from "../api/axios";
@@ -67,25 +68,27 @@ const UserEventPage = () => {
                     </h5>
                   </div>
                   <div className="flex flex-col flex-shrink-0 space-y-3 md:flex-row md:items-center lg:justify-end md:space-y-0 md:space-x-3">
-                    <button
-                      type="button"
-                      className="flex items-center justify-center px-4 py-2.5 text-sm font-medium text-white rounded-lg bg-[#2b293de0] hover:bg-[#2b293d] focus:ring-4 focus:ring-primary-300"
-                    >
-                      <svg
-                        className="h-3.5 w-3.5 mr-2"
-                        fill="currentColor"
-                        viewbox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg"
-                        aria-hidden="true"
+                    <Link to="/create-event">
+                      <button
+                        type="button"
+                        className="flex items-center justify-center px-4 py-2.5 text-sm font-medium text-white rounded-lg bg-[#2b293de0] hover:bg-[#2b293d] focus:ring-4 focus:ring-primary-300"
                       >
-                        <path
-                          clip-rule="evenodd"
-                          fill-rule="evenodd"
-                          d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
-                        />
-                      </svg>
-                      Create event
-                    </button>
+                        <svg
+                          className="h-3.5 w-3.5 mr-2"
+                          fill="currentColor"
+                          viewbox="0 0 20 20"
+                          xmlns="http://www.w3.org/2000/svg"
+                          aria-hidden="true"
+                        >
+                          <path
+                            clip-rule="evenodd"
+                            fill-rule="evenodd"
+                            d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
+                          />
+                        </svg>
+                        Create event
+                      </button>
+                    </Link>
                   </div>
                 </div>
                 <div className="flex flex-col px-4 py-5 space-y-3 lg:flex-row lg:items-center lg:justify-between lg:space-y-0 lg:space-x-4">

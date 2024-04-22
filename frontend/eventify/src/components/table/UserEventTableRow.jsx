@@ -6,7 +6,7 @@ const UserEventTableRow = ({ event, handleDelete }) => {
           <input
             id="checkbox-table-search-1"
             type="checkbox"
-            onclick="event.stopPropagation()"
+            // onClick="event.stopPropagation()"
             className="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 "
           />
           <label htmlFor="checkbox-table-search-1" className="sr-only">

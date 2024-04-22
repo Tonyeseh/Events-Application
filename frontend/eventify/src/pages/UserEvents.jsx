@@ -74,13 +74,13 @@ const UserEventPage = () => {
                         <svg
                           className="h-5 w-5 mr-2"
                           fill="currentColor"
-                          viewbox="0 0 20 20"
+                          viewBox="0 0 20 20"
                           xmlns="http://www.w3.org/2000/svg"
                           aria-hidden="true"
                         >
                           <path
-                            clip-rule="evenodd"
-                            fill-rule="evenodd"
+                            clipRule="evenodd"
+                            fillRule="evenodd"
                             d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
                           />
                         </svg>
@@ -109,9 +109,9 @@ const UserEventPage = () => {
                           >
                             <path
                               stroke="currentColor"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth="2"
                               d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
                             />
                           </svg>
@@ -141,7 +141,7 @@ const UserEventPage = () => {
                         id="underline_select"
                         className="block py-2.5 px-0 w-full text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer"
                       >
-                        <option selected>Category</option>
+                        <option defaultValue={""}>Category</option>
                         <option value="US">United States</option>
                         <option value="CA">Canada</option>
                         <option value="FR">France</option>
@@ -156,7 +156,7 @@ const UserEventPage = () => {
                         id="underline_select"
                         className="block py-2.5 px-0 w-full text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer"
                       >
-                        <option selected>Price</option>
+                        <option defaultValue={""}>Price</option>
                         <option value="Free">Free</option>
                         <option value="Paid">Paid</option>
                       </select>
@@ -169,7 +169,7 @@ const UserEventPage = () => {
                         id="underline_select"
                         className="block py-2.5 px-0 w-full text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer"
                       >
-                        <option selected>Choose a country</option>
+                        <option defaultValue={""}>Choose a country</option>
                         <option value="US">United States</option>
                         <option value="CA">Canada</option>
                         <option value="FR">France</option>
@@ -198,11 +198,11 @@ const UserEventPage = () => {
                           Title
                         </th>
                         <th scope="col" className="px-4 py-3">
-                          <div class="flex items-center">
+                          <div className="flex items-center">
                             Category
                             <button>
                               <svg
-                                class="w-3 h-3 ms-1.5"
+                                className="w-3 h-3 ms-1.5"
                                 aria-hidden="true"
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="currentColor"
@@ -217,11 +217,11 @@ const UserEventPage = () => {
                           Status
                         </th>
                         <th scope="col" className="px-4 py-3">
-                          <div class="flex items-center">
+                          <div className="flex items-center">
                             Interested
                             <button>
                               <svg
-                                class="w-3 h-3 ms-1.5"
+                                className="w-3 h-3 ms-1.5"
                                 aria-hidden="true"
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="currentColor"
@@ -233,11 +233,11 @@ const UserEventPage = () => {
                           </div>
                         </th>
                         <th scope="col" className="px-4 py-3">
-                          <div class="flex items-center">
+                          <div className="flex items-center">
                             Date
                             <button>
                               <svg
-                                class="w-3 h-3 ms-1.5"
+                                className="w-3 h-3 ms-1.5"
                                 aria-hidden="true"
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="currentColor"
@@ -249,11 +249,11 @@ const UserEventPage = () => {
                           </div>
                         </th>
                         <th scope="col" className="px-4 py-3">
-                          <div class="flex items-center">
+                          <div className="flex items-center">
                             Price Range
                             <button>
                               <svg
-                                class="w-3 h-3 ms-1.5"
+                                className="w-3 h-3 ms-1.5"
                                 aria-hidden="true"
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="currentColor"
@@ -306,13 +306,13 @@ const UserEventPage = () => {
                           className="w-5 h-5"
                           aria-hidden="true"
                           fill="currentColor"
-                          viewbox="0 0 20 20"
+                          viewBox="0 0 20 20"
                           xmlns="http://www.w3.org/2000/svg"
                         >
                           <path
-                            fill-rule="evenodd"
+                            fillRule="evenodd"
                             d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-                            clip-rule="evenodd"
+                            clipRule="evenodd"
                           />
                         </svg>
                       </a>
@@ -368,13 +368,13 @@ const UserEventPage = () => {
                           className="w-5 h-5"
                           aria-hidden="true"
                           fill="currentColor"
-                          viewbox="0 0 20 20"
+                          viewBox="0 0 20 20"
                           xmlns="http://www.w3.org/2000/svg"
                         >
                           <path
-                            fill-rule="evenodd"
+                            fillRule="evenodd"
                             d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                            clip-rule="evenodd"
+                            clipRule="evenodd"
                           />
                         </svg>
                       </a>

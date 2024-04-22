@@ -28,7 +28,9 @@ const UserEventTableRow = ({ event, handleDelete }) => {
       <td className="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">
         <div className="flex items-center">
           <div className="inline-block w-4 h-4 mr-2 bg-red-700 rounded-full"></div>
-          {event.isPublished ? "Published" : "Not Published"}
+          {event.isPublished && event.isPublished === "false"
+            ? "Not Published"
+            : "Published"}
         </div>
       </td>
       <td className="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">

@@ -61,6 +61,16 @@ export default class UsersController {
         .find({ userId: user._id })
         .toArray();
 
+      const ev = await Promise.all(
+        userEvents.map(async (e) => {
+          const interestCount = await (
+            await dbClient.interestedCollection()
+          ).countDocuments({ eventId: e._id });
+          e.interestCount = interestCount;
+          return e;
+        })
+      );
+
       return res.json({ events: userEvents });
     } catch (error) {
       res.status(500).json({ error: "Something went wrong!" });

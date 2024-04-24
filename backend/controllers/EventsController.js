@@ -158,6 +158,9 @@ const deleteEvent = async (req, res) => {
       res.status(404).json({ error: "Event not Found" });
       return;
     }
+    await (
+      await dbClient.interestedCollection()
+    ).deleteMany({ eventId: event._id });
     await (await dbClient.eventsCollection()).deleteOne(event);
     res.status(200).json({});
   } catch (error) {

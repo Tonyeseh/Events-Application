@@ -39,9 +39,9 @@ export default class UsersController {
           if (event) return { ...event, interested: true };
         })
       );
-      // const events = ev.filter((e) => e);
+      const events = ev.filter((e) => e);
 
-      res.json({ events: ev });
+      res.json({ events });
     } catch (error) {
       console.error(error);
       res.status(500).json({ error: "Something went wrong!" });

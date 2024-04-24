@@ -31,14 +31,16 @@ export default class UsersController {
       const eventIds = await (await dbClient.interestedCollection())
         .find({ userId: user._id })
         .toArray();
-      const events = await Promise.all(
+      const ev = await Promise.all(
         eventIds.map(async (element) => {
           const event = await (
             await dbClient.eventsCollection()
           ).findOne({ _id: element.eventId });
-          return { ...event, interested: true };
+          if (event) return { ...event, interested: true };
         })
       );
+      const events = ev.filter((e) => e);
+
       res.json({ events });
     } catch (error) {
       console.error(error);

@@ -39,7 +39,16 @@ export default class UsersController {
           if (event) return { ...event, interested: true };
         })
       );
-      const events = ev.filter((e) => e);
+      const evs = ev.filter((e) => e);
+      const events = await Promise.all(
+        evs.map(async (e) => {
+          const interestCount = await (
+            await dbClient.interestedCollection()
+          ).countDocuments({ eventId: e._id });
+          e.interestCount = interestCount;
+          return e;
+        })
+      );
 
       res.json({ events });
     } catch (error) {

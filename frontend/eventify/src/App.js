@@ -14,6 +14,7 @@ import RequireAuth from "./components/RequireAuth";
 import PersistentLogin from "./components/PersistLogin";
 import InterestedPage from "./pages/InterestedPage";
 import UserEventPage from "./pages/UserEvents";
+import EditProfile from "./pages/EditProfile";
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
               />
               <Route path="/create-event/review" element={<ReviewEvent />} />
               <Route path="/myevents" element={<UserEventPage />} />
+              <Route path="/profile" element={<EditProfile />} />
             </Route>
           </Route>
         </Routes>

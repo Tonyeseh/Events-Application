@@ -18,15 +18,16 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 // import EventCard from "../components/Cards/EventCard";
 import eventImg from "../img/event_image.png";
-import axios, { axiosPrivate } from "../api/axios";
 import useAuth from "../hooks/useAuth";
 import { Popover } from "../components/popover/popover";
+import useAxiosPrivate from "../hooks/useAxiosPrivate";
 
 const EventPage = () => {
   const { auth } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const { eventId } = useParams();
+  const axiosPrivate = useAxiosPrivate();
   const [isLoading, setIsLoading] = useState(true);
   const [eventData, setEventData] = useState({});
   const [starred, setStarred] = useState(false);
@@ -39,26 +40,15 @@ const EventPage = () => {
     try {
       if (!starred) {
         const response = await axiosPrivate.get(
-          `/events/${eventId}/interested`,
-          {
-            headers: {
-              Authorization: `Bearer ${auth.accessToken}`,
-            },
-          }
+          `/events/${eventId}/interested`
         );
 
         if (response.status === 200) {
-          console.log("starring");
           setStarred(true);
         }
       } else {
         const response = await axiosPrivate.get(
-          `/events/${eventId}/uninterested`,
-          {
-            headers: {
-              Authorization: `Bearer ${auth.accessToken}`,
-            },
-          }
+          `/events/${eventId}/uninterested`
         );
 
         if (response.status === 200) {
@@ -75,20 +65,16 @@ const EventPage = () => {
   useEffect(() => {
     const fetchEvent = async () => {
       try {
-        const result = await axios.get(`/events/${eventId}`, {
-          headers: {
-            Authorization: `Bearer ${auth.accessToken}`,
-          },
-        });
-        console.log(result.data);
+        const result = await axiosPrivate.get(`/events/${eventId}`);
         if (result.status === 200) {
           if (result.data.interested) {
             setStarred(true);
           }
           setEventData(result.data);
-        }
+        } else throw new Error("Cannot retrieve event");
       } catch (error) {
         console.log(error);
+        navigate("/404");
       } finally {
         setIsLoading(false);
       }
@@ -156,22 +142,40 @@ const EventPage = () => {
                   >
                     <li className="flex items-center justify-evenly text-[13px] py-1.5 mx-auto text-gray-600 hover:text-[#ffe047] hover:bg-gray-50">
                       <WhatsappShareButton url={shareLocation}>
-                        <WhatsappIcon round={true} size={20} />
+                        <WhatsappIcon
+                          round={true}
+                          size={20}
+                        />
                       </WhatsappShareButton>
                       <FacebookShareButton url={shareLocation}>
-                        <FacebookIcon round={true} size={20} />
+                        <FacebookIcon
+                          round={true}
+                          size={20}
+                        />
                       </FacebookShareButton>
                       <FacebookMessengerShareButton url={shareLocation}>
-                        <FacebookMessengerIcon round={true} size={20} />
+                        <FacebookMessengerIcon
+                          round={true}
+                          size={20}
+                        />
                       </FacebookMessengerShareButton>
                       <TwitterShareButton url={shareLocation}>
-                        <TwitterIcon round={true} size={20} />
+                        <TwitterIcon
+                          round={true}
+                          size={20}
+                        />
                       </TwitterShareButton>
                       <LinkedinShareButton url={shareLocation}>
-                        <LinkedinIcon round={true} size={20} />
+                        <LinkedinIcon
+                          round={true}
+                          size={20}
+                        />
                       </LinkedinShareButton>
                       <TelegramShareButton url={shareLocation}>
-                        <TelegramIcon round={true} size={20} />
+                        <TelegramIcon
+                          round={true}
+                          size={20}
+                        />
                       </TelegramShareButton>
                     </li>
                   </Popover>
@@ -271,7 +275,10 @@ const EventPage = () => {
                   ) : (
                     eventData.tickets &&
                     eventData.tickets.map((element, idx) => (
-                      <p className=" font-thin" key={idx}>
+                      <p
+                        className=" font-thin"
+                        key={idx}
+                      >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           viewBox="0 0 24 24"
@@ -315,7 +322,11 @@ const EventPage = () => {
                       {eventData.address} ({eventData.location})
                     </span>
                   </p>
-                  <img className="w-4/5 mt-3" src={eventImg} alt="" />
+                  <img
+                    className="w-4/5 mt-3"
+                    src={eventImg}
+                    alt=""
+                  />
                 </div>
               </div>
               <div className="w-full md:w-1/2 lg:w-3/5 my-7">

@@ -43,10 +43,6 @@ function App() {
             path="/register"
             element={<RegisterPage />}
           />
-          <Route
-            path="*"
-            element={<ErrorPage />}
-          />
         </Route>
       </Routes>
       <FormProvider>
@@ -79,6 +75,14 @@ function App() {
               <Route
                 path="/myevents"
                 element={<UserEventPage />}
+              />
+              <Route
+                path="/profile"
+                element={<EditProfile />}
+              />
+              <Route
+                path="*"
+                element={<ErrorPage />}
               />
             </Route>
           </Route>

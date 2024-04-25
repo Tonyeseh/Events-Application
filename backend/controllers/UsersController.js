@@ -45,16 +45,18 @@ export default class UsersController {
       ).updateOne(
         { email: user.email },
         {
-          firstName,
-          lastName,
-          website,
-          company,
-          phoneNumber,
-          address,
-          city,
-          country,
-          profileCover,
-          profilePics,
+          $set: {
+            firstName,
+            lastName,
+            website,
+            company,
+            phoneNumber,
+            address,
+            city,
+            country,
+            profileCover,
+            profilePics,
+          },
         }
       );
       console.log(result);

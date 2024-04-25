@@ -76,7 +76,11 @@ const CreateEvent = () => {
       <div className="my-10">
         <div className="mx-10 md:mx-24 text-[#2b293d]">
           <h1 className="text-2xl font-extrabold">Create a New Event</h1>
-          <img className="w-full my-12" src={progress} alt="" />
+          <img
+            className="w-full my-12"
+            src={progress}
+            alt=""
+          />
           {errorMsg && (
             <div
               className="w-2/3 mx-auto bg-red-100 border border-red-400 text-red-700 px-4 py-3 mb-5 rounded relative"
@@ -106,7 +110,10 @@ const CreateEvent = () => {
               <h3 className="text-xl font-thin w-full">Event Details</h3>
             </div>
             <div className="flex justify-around my-3 gap-4">
-              <label className="text-sm w-1/4 text-right" htmlFor="title">
+              <label
+                className="text-sm w-1/4 text-right"
+                htmlFor="title"
+              >
                 Event Title<span className="text-red-500">*</span>
               </label>
               <input
@@ -120,7 +127,10 @@ const CreateEvent = () => {
               />
             </div>
             <div className="flex justify-around my-3 gap-4">
-              <label className="text-sm w-1/4 text-right" htmlFor="category">
+              <label
+                className="text-sm w-1/4 text-right"
+                htmlFor="category"
+              >
                 Event Category<span className="text-red-500">*</span>
               </label>
               <select
@@ -155,7 +165,10 @@ const CreateEvent = () => {
                   checked={data.type === "single"}
                   onChange={handleChange}
                 />
-                <label className="text-sm font-bold mr-7" htmlFor="single">
+                <label
+                  className="text-sm font-bold mr-7"
+                  htmlFor="single"
+                >
                   Single Event
                 </label>
                 <input
@@ -167,14 +180,20 @@ const CreateEvent = () => {
                   checked={data.type === "recurring"}
                   onChange={handleChange}
                 />
-                <label className="text-sm font-bold mr-7" htmlFor="recurring">
+                <label
+                  className="text-sm font-bold mr-7"
+                  htmlFor="recurring"
+                >
                   Recurring Event
                 </label>
               </div>
             </div>
             {data.type === "recurring" && (
               <div className="flex justify-around my-3 gap-4">
-                <label className="text-sm w-1/4 text-right" htmlFor="frequency">
+                <label
+                  className="text-sm w-1/4 text-right"
+                  htmlFor="frequency"
+                >
                   Frequency<span className="text-red-500">*</span>
                 </label>
                 <select
@@ -193,7 +212,10 @@ const CreateEvent = () => {
               </div>
             )}
             <div className="flex justify-around my-5 gap-4">
-              <label className="text-sm w-1/4 text-right" htmlFor="">
+              <label
+                className="text-sm w-1/4 text-right"
+                htmlFor=""
+              >
                 Session(s)<span className="text-red-500">*</span>
               </label>
               <div className="flex flex-wrap w-full">
@@ -386,7 +408,10 @@ const CreateEvent = () => {
                   checked={data.location === "physical"}
                   onChange={handleChange}
                 />
-                <label className="text-sm font-bold mr-7" htmlFor="physical">
+                <label
+                  className="text-sm font-bold mr-7"
+                  htmlFor="physical"
+                >
                   Physical Event
                 </label>
                 <input
@@ -398,14 +423,20 @@ const CreateEvent = () => {
                   checked={data.location === "online"}
                   onChange={handleChange}
                 />
-                <label className="text-sm font-bold mr-7" htmlFor="online">
+                <label
+                  className="text-sm font-bold mr-7"
+                  htmlFor="online"
+                >
                   Online Event
                 </label>
               </div>
             </div>
             {data.location && data.location === "physical" && (
               <div className="flex justify-around my-3 gap-4">
-                <label className="text-sm w-1/4 text-right" htmlFor="address">
+                <label
+                  className="text-sm w-1/4 text-right"
+                  htmlFor="address"
+                >
                   Where will your event take place?
                   <span className="text-red-500">*</span>
                 </label>
@@ -422,7 +453,10 @@ const CreateEvent = () => {
             )}
             {data.location && data.location === "online" && (
               <div className="flex justify-around my-3 gap-4">
-                <label className="text-sm w-1/4 text-right" htmlFor="address">
+                <label
+                  className="text-sm w-1/4 text-right"
+                  htmlFor="address"
+                >
                   Event Link
                   <span className="text-red-500">*</span>
                 </label>
@@ -446,12 +480,16 @@ const CreateEvent = () => {
               </h3>
             </div>
             <div className="flex justify-around my-3 gap-4">
-              <label className="text-sm w-1/4 text-right" htmlFor="description">
+              <label
+                className="text-sm w-1/4 text-right"
+                htmlFor="description"
+              >
                 Event Description<span className="text-red-500">*</span>
               </label>
               <textarea
                 className="p-2 border border-[#8282827e] rounded-md mb-5 w-full focus:outline-none focus:ring focus:border-[#2b293d] placeholder:text-[#8282827e] placeholder:text-sm"
                 type="textarea"
+                rows={4}
                 id="description"
                 placeholder="Describe what's special about your event & other important details."
                 name="description"

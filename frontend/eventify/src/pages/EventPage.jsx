@@ -1,11 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
+import {
+  FacebookShareButton,
+  FacebookIcon,
+  FacebookMessengerShareButton,
+  FacebookMessengerIcon,
+  LinkedinShareButton,
+  LinkedinIcon,
+  TelegramIcon,
+  TelegramShareButton,
+  TwitterShareButton,
+  TwitterIcon,
+  WhatsappShareButton,
+  WhatsappIcon,
+} from "react-share";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 // import EventCard from "../components/Cards/EventCard";
 import eventImg from "../img/event_image.png";
 import axios, { axiosPrivate } from "../api/axios";
 import useAuth from "../hooks/useAuth";
+import { Popover } from "../components/popover/popover";
 
 const EventPage = () => {
   const { auth } = useAuth();
@@ -15,6 +30,10 @@ const EventPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [eventData, setEventData] = useState({});
   const [starred, setStarred] = useState(false);
+  const [shareRef, setShareRef] = useState(null);
+  const [shareOpen, setShareOpen] = useState(false);
+
+  const shareLocation = window.location.href;
 
   const toggleStarred = async (e) => {
     try {
@@ -105,7 +124,7 @@ const EventPage = () => {
                     viewBox="0 0 24 24"
                     strokeWidth={1.5}
                     stroke="currentColor"
-                    className="w-6 h-6 block m-auto"
+                    className="w-6 h-6 block m-auto cursor-pointer"
                     onClick={toggleStarred}
                   >
                     <path
@@ -120,7 +139,9 @@ const EventPage = () => {
                     viewBox="0 0 24 24"
                     strokeWidth={1.5}
                     stroke="currentColor"
-                    className="w-6 h-6"
+                    className="w-6 h-6 cursor-pointer"
+                    onClick={() => setShareOpen((s) => !s)}
+                    ref={setShareRef}
                   >
                     <path
                       strokeLinecap="round"
@@ -128,6 +149,32 @@ const EventPage = () => {
                       d="M7.217 10.907a2.25 2.25 0 1 0 0 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186 9.566-5.314m-9.566 7.5 9.566 5.314m0 0a2.25 2.25 0 1 0 3.935 2.186 2.25 2.25 0 0 0-3.935-2.186Zm0-12.814a2.25 2.25 0 1 0 3.933-2.185 2.25 2.25 0 0 0-3.933 2.185Z"
                     />
                   </svg>
+                  <Popover
+                    reference={shareRef}
+                    isOpen={shareOpen}
+                    onClose={() => setShareOpen(false)}
+                  >
+                    <li className="flex items-center justify-evenly text-[13px] py-1.5 mx-auto text-gray-600 hover:text-[#ffe047] hover:bg-gray-50">
+                      <WhatsappShareButton url={shareLocation}>
+                        <WhatsappIcon round={true} size={20} />
+                      </WhatsappShareButton>
+                      <FacebookShareButton url={shareLocation}>
+                        <FacebookIcon round={true} size={20} />
+                      </FacebookShareButton>
+                      <FacebookMessengerShareButton url={shareLocation}>
+                        <FacebookMessengerIcon round={true} size={20} />
+                      </FacebookMessengerShareButton>
+                      <TwitterShareButton url={shareLocation}>
+                        <TwitterIcon round={true} size={20} />
+                      </TwitterShareButton>
+                      <LinkedinShareButton url={shareLocation}>
+                        <LinkedinIcon round={true} size={20} />
+                      </LinkedinShareButton>
+                      <TelegramShareButton url={shareLocation}>
+                        <TelegramIcon round={true} size={20} />
+                      </TelegramShareButton>
+                    </li>
+                  </Popover>
                 </div>
               </div>
               <div className="w-full flex flex-wrap justify-between">

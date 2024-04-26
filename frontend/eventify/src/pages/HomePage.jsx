@@ -44,7 +44,6 @@ function HomePage() {
               },
             }
           );
-          console.log(eventInLocation);
           setData({
             locationSection: eventInLocation.data.events,
             onlineSection: onlineSection.data.events,
@@ -66,7 +65,7 @@ function HomePage() {
     };
     fetchData();
     return (() => console.log("homepage effect"))();
-  }, [auth.accessToken, auth.user]);
+  }, [auth]);
   return (
     <div>
       <Header />

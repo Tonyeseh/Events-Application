@@ -226,7 +226,7 @@ const CreateEvent = () => {
                   <div className="flex flex-col w-1/4">
                     <label
                       htmlFor="startDate"
-                      class="block mb-2 text-sm font-medium text-gray-90"
+                      className="block mb-2 text-sm font-medium text-gray-90"
                     >
                       Start Date<span className="text-red-500">*</span>
                     </label>
@@ -242,7 +242,7 @@ const CreateEvent = () => {
                     <div className="flex flex-col w-1/4">
                       <label
                         htmlFor="endDate"
-                        class="block mb-2 text-sm font-medium text-gray-90"
+                        className="block mb-2 text-sm font-medium text-gray-90"
                       >
                         End Date<span className="text-red-500">*</span>:
                       </label>
@@ -254,12 +254,12 @@ const CreateEvent = () => {
                         value={sessionChildren.endDate}
                       />
 
-                      {/* <div class="relative max-w-sm">
+                      {/* <div className="relative max-w-sm">
                         <input
                           type="text"
                           name="endDate"
                           id="endDate"
-                          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                           placeholder="Select date"
                           min={new Date().toISOString().split("T")[0]}
                           onChange={handleSessionChange}
@@ -280,33 +280,33 @@ const CreateEvent = () => {
                       value={sessionChildren.startTime}
                     /> */}
                     <label
-                      for="startTime"
-                      class="block mb-2 text-sm font-medium text-gray-90"
+                      htmlFor="startTime"
+                      className="block mb-2 text-sm font-medium text-gray-90"
                     >
                       Start time<span className="text-red-500">*</span>:
                     </label>
-                    <div class="flex">
+                    <div className="flex">
                       <input
                         type="time"
                         name="startTime"
                         id="startTime"
                         onChange={handleSessionChange}
                         value={sessionChildren.startTime}
-                        class="rounded-none rounded-s-lg bg-gray-50 border text-gray-900 leading-none focus:ring-blue-500 focus:border-blue-500 block flex-1 w-full text-sm border-gray-300 p-2.5"
+                        className="rounded-none rounded-s-lg bg-gray-50 border text-gray-900 leading-none focus:ring-blue-500 focus:border-blue-500 block flex-1 w-full text-sm border-gray-300 p-2.5"
                         required
                       />
-                      <span class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border rounded-s-0 border-s-0 border-gray-300 rounded-e-md">
+                      <span className="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border rounded-s-0 border-s-0 border-gray-300 rounded-e-md">
                         <svg
-                          class="w-4 h-4 text-gray-500 "
+                          className="w-4 h-4 text-gray-500 "
                           aria-hidden="true"
                           xmlns="http://www.w3.org/2000/svg"
                           fill="currentColor"
                           viewBox="0 0 24 24"
                         >
                           <path
-                            fill-rule="evenodd"
+                            fillRule="evenodd"
                             d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4a1 1 0 1 0-2 0v4a1 1 0 0 0 .293.707l3 3a1 1 0 0 0 1.414-1.414L13 11.586V8Z"
-                            clip-rule="evenodd"
+                            clipRule="evenodd"
                           />
                         </svg>
                       </span>
@@ -324,35 +324,35 @@ const CreateEvent = () => {
                       value={sessionChildren.endTime}
                     /> */}
                     <label
-                      for="endTime"
-                      class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                      htmlFor="endTime"
+                      className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                     >
                       End time<span className="text-red-500">*</span>:
                     </label>
-                    <div class="flex">
+                    <div className="flex">
                       <input
                         type="time"
                         name="endTime"
                         id="endTime"
                         onChange={handleSessionChange}
                         value={sessionChildren.endTime}
-                        class="rounded-none rounded-s-lg bg-gray-50 border text-gray-900 leading-none focus:ring-blue-500 focus:border-blue-500 block flex-1 w-full text-sm border-gray-300 p-2.5"
+                        className="rounded-none rounded-s-lg bg-gray-50 border text-gray-900 leading-none focus:ring-blue-500 focus:border-blue-500 block flex-1 w-full text-sm border-gray-300 p-2.5"
                         min="09:00"
                         max="18:00"
                         required
                       />
-                      <span class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border rounded-s-0 border-s-0 border-gray-300 rounded-e-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                      <span className="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border rounded-s-0 border-s-0 border-gray-300 rounded-e-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
                         <svg
-                          class="w-4 h-4 text-gray-500 dark:text-gray-400"
+                          className="w-4 h-4 text-gray-500 dark:text-gray-400"
                           aria-hidden="true"
                           xmlns="http://www.w3.org/2000/svg"
                           fill="currentColor"
                           viewBox="0 0 24 24"
                         >
                           <path
-                            fill-rule="evenodd"
+                            fillRule="evenodd"
                             d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4a1 1 0 1 0-2 0v4a1 1 0 0 0 .293.707l3 3a1 1 0 0 0 1.414-1.414L13 11.586V8Z"
-                            clip-rule="evenodd"
+                            clipRule="evenodd"
                           />
                         </svg>
                       </span>

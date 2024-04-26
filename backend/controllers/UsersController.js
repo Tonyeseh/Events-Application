@@ -16,6 +16,57 @@ export default class UsersController {
     return res.status(200).json(user);
   }
 
+  static async updateUser(req, res) {
+    const { userEmail } = req;
+    console.log(userEmail);
+    const {
+      firstName,
+      lastName,
+      website,
+      company,
+      phoneNumber,
+      address,
+      city,
+      country,
+      profilePics,
+      profileCover,
+    } = req.body;
+
+    if (!userEmail) return res.status(403).json({ error: "Forbidden" });
+
+    try {
+      const user = await (
+        await dbClient.usersCollection()
+      ).findOne({ email: userEmail });
+      if (!user) return res.status(403).json({ error: "Forbidden" });
+
+      const result = await (
+        await dbClient.usersCollection()
+      ).updateOne(
+        { email: user.email },
+        {
+          $set: {
+            firstName,
+            lastName,
+            website,
+            company,
+            phoneNumber,
+            address,
+            city,
+            country,
+            profileCover,
+            profilePics,
+          },
+        }
+      );
+      console.log(result);
+      return res.status(200).json({ result });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ error: "Something went wrong!" });
+    }
+  }
+
   static async getInterestedEvents(req, res) {
     const { userEmail } = req;
 

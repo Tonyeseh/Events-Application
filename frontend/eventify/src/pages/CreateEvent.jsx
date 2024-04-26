@@ -76,7 +76,11 @@ const CreateEvent = () => {
       <div className="my-10">
         <div className="mx-10 md:mx-24 text-[#2b293d]">
           <h1 className="text-2xl font-extrabold">Create a New Event</h1>
-          <img className="w-full my-12" src={progress} alt="" />
+          <img
+            className="w-full my-12"
+            src={progress}
+            alt=""
+          />
           {errorMsg && (
             <div
               className="w-2/3 mx-auto bg-red-100 border border-red-400 text-red-700 px-4 py-3 mb-5 rounded relative"
@@ -106,7 +110,10 @@ const CreateEvent = () => {
               <h3 className="text-xl font-thin w-full">Event Details</h3>
             </div>
             <div className="flex justify-around my-3 gap-4">
-              <label className="text-sm w-1/4 text-right" htmlFor="title">
+              <label
+                className="text-sm w-1/4 text-right"
+                htmlFor="title"
+              >
                 Event Title<span className="text-red-500">*</span>
               </label>
               <input
@@ -120,7 +127,10 @@ const CreateEvent = () => {
               />
             </div>
             <div className="flex justify-around my-3 gap-4">
-              <label className="text-sm w-1/4 text-right" htmlFor="category">
+              <label
+                className="text-sm w-1/4 text-right"
+                htmlFor="category"
+              >
                 Event Category<span className="text-red-500">*</span>
               </label>
               <select
@@ -155,7 +165,10 @@ const CreateEvent = () => {
                   checked={data.type === "single"}
                   onChange={handleChange}
                 />
-                <label className="text-sm font-bold mr-7" htmlFor="single">
+                <label
+                  className="text-sm font-bold mr-7"
+                  htmlFor="single"
+                >
                   Single Event
                 </label>
                 <input
@@ -167,14 +180,20 @@ const CreateEvent = () => {
                   checked={data.type === "recurring"}
                   onChange={handleChange}
                 />
-                <label className="text-sm font-bold mr-7" htmlFor="recurring">
+                <label
+                  className="text-sm font-bold mr-7"
+                  htmlFor="recurring"
+                >
                   Recurring Event
                 </label>
               </div>
             </div>
             {data.type === "recurring" && (
               <div className="flex justify-around my-3 gap-4">
-                <label className="text-sm w-1/4 text-right" htmlFor="frequency">
+                <label
+                  className="text-sm w-1/4 text-right"
+                  htmlFor="frequency"
+                >
                   Frequency<span className="text-red-500">*</span>
                 </label>
                 <select
@@ -193,7 +212,10 @@ const CreateEvent = () => {
               </div>
             )}
             <div className="flex justify-around my-5 gap-4">
-              <label className="text-sm w-1/4 text-right" htmlFor="">
+              <label
+                className="text-sm w-1/4 text-right"
+                htmlFor=""
+              >
                 Session(s)<span className="text-red-500">*</span>
               </label>
               <div className="flex flex-wrap w-full">
@@ -204,7 +226,7 @@ const CreateEvent = () => {
                   <div className="flex flex-col w-1/4">
                     <label
                       htmlFor="startDate"
-                      class="block mb-2 text-sm font-medium text-gray-90"
+                      className="block mb-2 text-sm font-medium text-gray-90"
                     >
                       Start Date<span className="text-red-500">*</span>
                     </label>
@@ -220,7 +242,7 @@ const CreateEvent = () => {
                     <div className="flex flex-col w-1/4">
                       <label
                         htmlFor="endDate"
-                        class="block mb-2 text-sm font-medium text-gray-90"
+                        className="block mb-2 text-sm font-medium text-gray-90"
                       >
                         End Date<span className="text-red-500">*</span>:
                       </label>
@@ -232,12 +254,12 @@ const CreateEvent = () => {
                         value={sessionChildren.endDate}
                       />
 
-                      {/* <div class="relative max-w-sm">
+                      {/* <div className="relative max-w-sm">
                         <input
                           type="text"
                           name="endDate"
                           id="endDate"
-                          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                           placeholder="Select date"
                           min={new Date().toISOString().split("T")[0]}
                           onChange={handleSessionChange}
@@ -258,33 +280,33 @@ const CreateEvent = () => {
                       value={sessionChildren.startTime}
                     /> */}
                     <label
-                      for="startTime"
-                      class="block mb-2 text-sm font-medium text-gray-90"
+                      htmlFor="startTime"
+                      className="block mb-2 text-sm font-medium text-gray-90"
                     >
                       Start time<span className="text-red-500">*</span>:
                     </label>
-                    <div class="flex">
+                    <div className="flex">
                       <input
                         type="time"
                         name="startTime"
                         id="startTime"
                         onChange={handleSessionChange}
                         value={sessionChildren.startTime}
-                        class="rounded-none rounded-s-lg bg-gray-50 border text-gray-900 leading-none focus:ring-blue-500 focus:border-blue-500 block flex-1 w-full text-sm border-gray-300 p-2.5"
+                        className="rounded-none rounded-s-lg bg-gray-50 border text-gray-900 leading-none focus:ring-blue-500 focus:border-blue-500 block flex-1 w-full text-sm border-gray-300 p-2.5"
                         required
                       />
-                      <span class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border rounded-s-0 border-s-0 border-gray-300 rounded-e-md">
+                      <span className="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border rounded-s-0 border-s-0 border-gray-300 rounded-e-md">
                         <svg
-                          class="w-4 h-4 text-gray-500 "
+                          className="w-4 h-4 text-gray-500 "
                           aria-hidden="true"
                           xmlns="http://www.w3.org/2000/svg"
                           fill="currentColor"
                           viewBox="0 0 24 24"
                         >
                           <path
-                            fill-rule="evenodd"
+                            fillRule="evenodd"
                             d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4a1 1 0 1 0-2 0v4a1 1 0 0 0 .293.707l3 3a1 1 0 0 0 1.414-1.414L13 11.586V8Z"
-                            clip-rule="evenodd"
+                            clipRule="evenodd"
                           />
                         </svg>
                       </span>
@@ -302,35 +324,35 @@ const CreateEvent = () => {
                       value={sessionChildren.endTime}
                     /> */}
                     <label
-                      for="endTime"
-                      class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                      htmlFor="endTime"
+                      className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                     >
                       End time<span className="text-red-500">*</span>:
                     </label>
-                    <div class="flex">
+                    <div className="flex">
                       <input
                         type="time"
                         name="endTime"
                         id="endTime"
                         onChange={handleSessionChange}
                         value={sessionChildren.endTime}
-                        class="rounded-none rounded-s-lg bg-gray-50 border text-gray-900 leading-none focus:ring-blue-500 focus:border-blue-500 block flex-1 w-full text-sm border-gray-300 p-2.5"
+                        className="rounded-none rounded-s-lg bg-gray-50 border text-gray-900 leading-none focus:ring-blue-500 focus:border-blue-500 block flex-1 w-full text-sm border-gray-300 p-2.5"
                         min="09:00"
                         max="18:00"
                         required
                       />
-                      <span class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border rounded-s-0 border-s-0 border-gray-300 rounded-e-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                      <span className="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border rounded-s-0 border-s-0 border-gray-300 rounded-e-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
                         <svg
-                          class="w-4 h-4 text-gray-500 dark:text-gray-400"
+                          className="w-4 h-4 text-gray-500 dark:text-gray-400"
                           aria-hidden="true"
                           xmlns="http://www.w3.org/2000/svg"
                           fill="currentColor"
                           viewBox="0 0 24 24"
                         >
                           <path
-                            fill-rule="evenodd"
+                            fillRule="evenodd"
                             d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4a1 1 0 1 0-2 0v4a1 1 0 0 0 .293.707l3 3a1 1 0 0 0 1.414-1.414L13 11.586V8Z"
-                            clip-rule="evenodd"
+                            clipRule="evenodd"
                           />
                         </svg>
                       </span>
@@ -386,7 +408,10 @@ const CreateEvent = () => {
                   checked={data.location === "physical"}
                   onChange={handleChange}
                 />
-                <label className="text-sm font-bold mr-7" htmlFor="physical">
+                <label
+                  className="text-sm font-bold mr-7"
+                  htmlFor="physical"
+                >
                   Physical Event
                 </label>
                 <input
@@ -398,14 +423,20 @@ const CreateEvent = () => {
                   checked={data.location === "online"}
                   onChange={handleChange}
                 />
-                <label className="text-sm font-bold mr-7" htmlFor="online">
+                <label
+                  className="text-sm font-bold mr-7"
+                  htmlFor="online"
+                >
                   Online Event
                 </label>
               </div>
             </div>
             {data.location && data.location === "physical" && (
               <div className="flex justify-around my-3 gap-4">
-                <label className="text-sm w-1/4 text-right" htmlFor="address">
+                <label
+                  className="text-sm w-1/4 text-right"
+                  htmlFor="address"
+                >
                   Where will your event take place?
                   <span className="text-red-500">*</span>
                 </label>
@@ -422,7 +453,10 @@ const CreateEvent = () => {
             )}
             {data.location && data.location === "online" && (
               <div className="flex justify-around my-3 gap-4">
-                <label className="text-sm w-1/4 text-right" htmlFor="address">
+                <label
+                  className="text-sm w-1/4 text-right"
+                  htmlFor="address"
+                >
                   Event Link
                   <span className="text-red-500">*</span>
                 </label>
@@ -446,12 +480,16 @@ const CreateEvent = () => {
               </h3>
             </div>
             <div className="flex justify-around my-3 gap-4">
-              <label className="text-sm w-1/4 text-right" htmlFor="description">
+              <label
+                className="text-sm w-1/4 text-right"
+                htmlFor="description"
+              >
                 Event Description<span className="text-red-500">*</span>
               </label>
               <textarea
                 className="p-2 border border-[#8282827e] rounded-md mb-5 w-full focus:outline-none focus:ring focus:border-[#2b293d] placeholder:text-[#8282827e] placeholder:text-sm"
                 type="textarea"
+                rows={4}
                 id="description"
                 placeholder="Describe what's special about your event & other important details."
                 name="description"

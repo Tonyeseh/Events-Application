@@ -5,6 +5,7 @@ import EventHero from "../components/EventHero";
 import SearchEventCard from "../components/Cards/SearchEventCard";
 import useAuth from "../hooks/useAuth";
 import axios, { axiosPrivate } from "../api/axios";
+import EmptySearch from "../components/states/EmptySearch";
 
 const SearchPage = () => {
   const { auth } = useAuth();
@@ -22,7 +23,9 @@ const SearchPage = () => {
           const response = await axios("/events");
           setEvents(response.data.events);
         }
-      } catch (error) {}
+      } catch (error) {
+        setEvents([]);
+      }
     };
     fetchData();
   }, [auth]);
@@ -122,9 +125,16 @@ const SearchPage = () => {
             </div>
           </div>
           <div className="w-full flex flex-wrap">
-            {events
-              ? events.map((e) => <SearchEventCard event={e} key={e._id} />)
-              : null}
+            {events && events.length > 0 ? (
+              events.map((e) => (
+                <SearchEventCard
+                  event={e}
+                  key={e._id}
+                />
+              ))
+            ) : (
+              <EmptySearch />
+            )}
           </div>
         </div>
       </div>

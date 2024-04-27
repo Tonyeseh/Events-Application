@@ -5,6 +5,7 @@ import Footer from "../components/Footer";
 import { axiosPrivate } from "../api/axios";
 import useAuth from "../hooks/useAuth";
 import UserEventTableRow from "../components/table/UserEventTableRow";
+import EmptyTable from "../components/states/EmptyTable";
 
 const UserEventPage = () => {
   const { auth } = useAuth();
@@ -134,7 +135,10 @@ const UserEventPage = () => {
                   </div>
                   <div className="flex flex-col flex-shrink-0 space-y-3 md:flex-row md:items-center lg:justify-end md:space-y-0 md:space-x-3 w-2/3">
                     <div className="w-1/4">
-                      <label htmlFor="underline_select" className="sr-only">
+                      <label
+                        htmlFor="underline_select"
+                        className="sr-only"
+                      >
                         Event Category
                       </label>
                       <select
@@ -149,7 +153,10 @@ const UserEventPage = () => {
                       </select>
                     </div>
                     <form className="w-1/4">
-                      <label htmlFor="underline_select" className="sr-only">
+                      <label
+                        htmlFor="underline_select"
+                        className="sr-only"
+                      >
                         Price
                       </label>
                       <select
@@ -162,7 +169,10 @@ const UserEventPage = () => {
                       </select>
                     </form>
                     <form className="w-1/4">
-                      <label htmlFor="underline_select" className="sr-only">
+                      <label
+                        htmlFor="underline_select"
+                        className="sr-only"
+                      >
                         Underline select
                       </label>
                       <select
@@ -182,22 +192,34 @@ const UserEventPage = () => {
                   <table className="w-full text-sm text-left text-gray-500">
                     <thead className="text-xs text-gray-700 uppercase bg-gray-50">
                       <tr>
-                        <th scope="col" className="p-4">
+                        <th
+                          scope="col"
+                          className="p-4"
+                        >
                           <div className="flex items-center">
                             <input
                               id="checkbox-all"
                               type="checkbox"
                               className="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500"
                             />
-                            <label htmlFor="checkbox-all" className="sr-only">
+                            <label
+                              htmlFor="checkbox-all"
+                              className="sr-only"
+                            >
                               checkbox
                             </label>
                           </div>
                         </th>
-                        <th scope="col" className="px-4 py-3">
+                        <th
+                          scope="col"
+                          className="px-4 py-3"
+                        >
                           Title
                         </th>
-                        <th scope="col" className="px-4 py-3">
+                        <th
+                          scope="col"
+                          className="px-4 py-3"
+                        >
                           <div className="flex items-center">
                             Category
                             <button>
@@ -213,10 +235,16 @@ const UserEventPage = () => {
                             </button>
                           </div>
                         </th>
-                        <th scope="col" className="px-4 py-3">
+                        <th
+                          scope="col"
+                          className="px-4 py-3"
+                        >
                           Status
                         </th>
-                        <th scope="col" className="px-4 py-3">
+                        <th
+                          scope="col"
+                          className="px-4 py-3"
+                        >
                           <div className="flex items-center">
                             Interested
                             <button>
@@ -232,7 +260,10 @@ const UserEventPage = () => {
                             </button>
                           </div>
                         </th>
-                        <th scope="col" className="px-4 py-3">
+                        <th
+                          scope="col"
+                          className="px-4 py-3"
+                        >
                           <div className="flex items-center">
                             Date
                             <button>
@@ -248,7 +279,10 @@ const UserEventPage = () => {
                             </button>
                           </div>
                         </th>
-                        <th scope="col" className="px-4 py-3">
+                        <th
+                          scope="col"
+                          className="px-4 py-3"
+                        >
                           <div className="flex items-center">
                             Price Range
                             <button>
@@ -264,24 +298,32 @@ const UserEventPage = () => {
                             </button>
                           </div>
                         </th>
-                        <th scope="col" className="px-4 py-3">
+                        <th
+                          scope="col"
+                          className="px-4 py-3"
+                        >
                           Last Update
                         </th>
-                        <th scope="col" className="px-4 py-3">
+                        <th
+                          scope="col"
+                          className="px-4 py-3"
+                        >
                           Action
                         </th>
                       </tr>
                     </thead>
                     <tbody>
-                      {events && events.length > 0
-                        ? events.map((event) => (
-                            <UserEventTableRow
-                              key={event._id}
-                              event={event}
-                              handleDelete={handleDelete}
-                            />
-                          ))
-                        : null}
+                      {events && events.length > 0 ? (
+                        events.map((event) => (
+                          <UserEventTableRow
+                            key={event._id}
+                            event={event}
+                            handleDelete={handleDelete}
+                          />
+                        ))
+                      ) : (
+                        <EmptyTable />
+                      )}
                     </tbody>
                   </table>
                 </div>

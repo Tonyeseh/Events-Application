@@ -21,6 +21,7 @@ import eventImg from "../img/event_image.png";
 import useAuth from "../hooks/useAuth";
 import { Popover } from "../components/popover/popover";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
+import EventPageLoading from "../components/states/EventPageLoading";
 
 const EventPage = () => {
   const { auth } = useAuth();
@@ -89,7 +90,7 @@ const EventPage = () => {
     <div>
       <Header />
       {isLoading ? (
-        <p>Loading...</p>
+        <EventPageLoading />
       ) : (
         eventData && (
           <>

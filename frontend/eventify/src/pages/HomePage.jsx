@@ -12,6 +12,7 @@ import useAuth from "../hooks/useAuth";
 
 function HomePage() {
   const { auth } = useAuth();
+  const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState({
     locationSection: "",
     onlineSection: "",
@@ -61,6 +62,8 @@ function HomePage() {
         }
       } catch (error) {
         console.error(error);
+      } finally {
+        setIsLoading(false);
       }
     };
     fetchData();
@@ -71,9 +74,18 @@ function HomePage() {
       <Header />
       <Hero />
       <CategorySection />
-      <PopularInLocation events={data.locationSection} />
-      <BestOnlineSection events={data.onlineSection} />
-      <TrendingSection events={data.trendingSection} />
+      <PopularInLocation
+        events={data.locationSection}
+        isLoading={isLoading}
+      />
+      <BestOnlineSection
+        events={data.onlineSection}
+        isLoading={isLoading}
+      />
+      <TrendingSection
+        events={data.trendingSection}
+        isLoading={isLoading}
+      />
       <NewsLetterSection />
       <Footer />
     </div>

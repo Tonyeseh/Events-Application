@@ -6,9 +6,11 @@ import SearchEventCard from "../components/Cards/SearchEventCard";
 import useAuth from "../hooks/useAuth";
 import axios, { axiosPrivate } from "../api/axios";
 import EmptySearch from "../components/states/EmptySearch";
+import SearchCardLoadingState from "../components/states/SearchCardLoadingState";
 
 const SearchPage = () => {
   const { auth } = useAuth();
+  const [isLoading, setIsLoading] = useState(true);
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
@@ -25,6 +27,10 @@ const SearchPage = () => {
         }
       } catch (error) {
         setEvents([]);
+      } finally {
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 2000);
       }
     };
     fetchData();
@@ -125,7 +131,16 @@ const SearchPage = () => {
             </div>
           </div>
           <div className="w-full flex flex-wrap">
-            {events && events.length > 0 ? (
+            {isLoading ? (
+              <>
+                <SearchCardLoadingState />
+                <SearchCardLoadingState />
+                <SearchCardLoadingState />
+                <SearchCardLoadingState />
+                <SearchCardLoadingState />
+                <SearchCardLoadingState />
+              </>
+            ) : events && events.length > 0 ? (
               events.map((e) => (
                 <SearchEventCard
                   event={e}

@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-// import { axiosPrivate } from "../api/axios";
 import EventCard from "../components/Cards/EventCard";
-import useAuth from "../hooks/useAuth";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 
 const InterestedPage = () => {
-  const { auth } = useAuth();
   const [events, setEvents] = useState([]);
   const axiosPrivate = useAxiosPrivate();
   useEffect(() => {
@@ -21,7 +18,7 @@ const InterestedPage = () => {
     };
     fetchData();
     return (() => console.log("interested Page effect"))();
-  }, [auth]);
+  }, []);
   return (
     <>
       <Header />

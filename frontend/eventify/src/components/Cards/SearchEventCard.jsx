@@ -1,11 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
-// import eventImg from "../../img/event_image.png";
+import {
+  checkMaxDateMOnth,
+  getMaxDate,
+  getMinDate,
+} from "../../helperFunc/dateUtils";
 
 const SearchEventCard = ({ event }) => {
-  console.log(event);
   return (
-    <Link className="w-1/2" to={`/events/${event._id}`}>
+    <Link
+      className="w-1/2"
+      to={`/events/${event._id}`}
+    >
       <div className="px-5 mb-10 flex">
         <div className="relative w-1/2">
           <img
@@ -40,25 +46,40 @@ const SearchEventCard = ({ event }) => {
             </p>
             <p className="p-0.5 font-medium">
               {event &&
-                `${new Date(event.session[0].startDate).toLocaleString(
+                `${new Date(getMinDate(event.session)).toLocaleString("en-us", {
+                  month: "short",
+                })} ${new Date(getMinDate(event.session)).toLocaleString(
                   "en-us",
-                  {
-                    day: "numeric",
-                    month: "numeric",
-                    year: "numeric",
-                  }
-                )}`}{" "}
+                  { day: "numeric" }
+                )} ${
+                  event.session.length > 1
+                    ? ` - ${
+                        checkMaxDateMOnth(event.session)
+                          ? checkMaxDateMOnth(event.session)
+                          : ""
+                      } ${new Date(getMaxDate(event.session)).toLocaleString(
+                        "en-us",
+                        {
+                          day: "numeric",
+                        }
+                      )}`
+                    : ""
+                }`}{" "}
               | {event.location === "online" ? "Online" : event.address}
             </p>
             <p className="p-0.5 font-thin">
               {event &&
                 `${new Date(
-                  `${event.session[0].startDate}T${event.session[0].startTime}`
+                  `${new Date().toISOString().split("T")[0]}T${
+                    event.session[0].startTime
+                  }`
                 ).toLocaleTimeString("en-US", {
                   hour: "2-digit",
                   minute: "2-digit",
                 })} - ${new Date(
-                  `${event.session[0].startDate}T${event.session[0].endTime}`
+                  `${new Date().toISOString().split("T")[0]}T${
+                    event.session[0].endTime
+                  }`
                 ).toLocaleTimeString("en-US", {
                   hour: "2-digit",
                   minute: "2-digit",

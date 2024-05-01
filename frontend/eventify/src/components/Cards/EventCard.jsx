@@ -115,19 +115,36 @@ const EventCard = ({ event }) => {
           <div className="text-center w-1/3">
             <p className="text-[#4539B4] mb-1 font-extrabold">
               {event &&
-                new Date(event.session[0].startDate).toLocaleString("en-us", {
+                new Date(getMinDate(event.session)).toLocaleString("en-us", {
                   month: "short",
                 })}
             </p>
             <p className="text-sm font-bold">
               {event &&
-                `${new Date(event.session[0].startDate).toLocaleString(
-                  "en-us",
-                  {
-                    day: "numeric",
-                  }
-                )}`}
+                `${new Date(getMinDate(event.session)).toLocaleString("en-us", {
+                  day: "numeric",
+                })}`}{" "}
             </p>
+
+            {event.session.length > 1 && " - "}
+
+            {event.session.length > 1 && checkMaxDateMOnth(event.session) ? (
+              <p className="text-[#4539B4] mb-1 font-extrabold">
+                {checkMaxDateMOnth(event.session)}
+              </p>
+            ) : null}
+
+            {event.session.length > 1 && (
+              <p className="text-sm font-bold">
+                {event &&
+                  `${new Date(getMaxDate(event.session)).toLocaleString(
+                    "en-us",
+                    {
+                      day: "numeric",
+                    }
+                  )}`}{" "}
+              </p>
+            )}
           </div>
           <div className="pl-3 text-sm text-gray-700">
             <h3 className="text-base font-semibold p-0.5">

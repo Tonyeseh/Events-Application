@@ -59,6 +59,10 @@ const newEvent = async (req, res) => {
     isPublished = false,
     tags,
   } = req.body;
+  for (const sess of session) {
+    sess.startDate = new Date(sess.startDate);
+    sess.endDate && sess.endDate === new Date(sess.endDate);
+  }
   if (
     !title &&
     !category &&
@@ -113,7 +117,10 @@ const updateEvent = async (req, res) => {
 const getEvents = async (req, res) => {
   const { location } = req.query;
 
-  const subQuery = { isPublished: true };
+  const subQuery = {
+    isPublished: true,
+    "session.startDate": { $gt: new Date() },
+  };
 
   const query = location && location === "online" ? { location } : {};
 

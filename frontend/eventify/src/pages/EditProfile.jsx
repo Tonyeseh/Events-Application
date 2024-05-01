@@ -26,11 +26,11 @@ const EditProfile = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(userData);
     try {
       const response = await axiosPrivate.post("user/profile", userData, {
         headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${auth.accessToken}`,
+          "Content-Type": "multipart/form-data",
         },
       });
 

@@ -3,6 +3,12 @@ import { useNavigate, useLocation, Link } from "react-router-dom";
 import { axiosPrivate } from "../../api/axios";
 import useAuth from "../../hooks/useAuth";
 
+import {
+  getMaxDate,
+  getMinDate,
+  checkMaxDateMOnth,
+} from "../../helperFunc/dateUtils";
+
 const EventCard = ({ event }) => {
   const { auth } = useAuth();
   const navigate = useNavigate();
@@ -12,35 +18,6 @@ const EventCard = ({ event }) => {
   );
 
   const eventId = event._id;
-
-  const getMaxDate = (sessions) => {
-    let maxDate = sessions[0].startDate;
-    for (const sess of sessions) {
-      if (new Date(sess.startDate) > new Date(maxDate))
-        maxDate = sess.startDate;
-    }
-    return maxDate;
-  };
-
-  const getMinDate = (sessions) => {
-    let minDate = sessions[0].startDate;
-    for (const sess of sessions) {
-      if (new Date(sess.startDate) < new Date(minDate))
-        minDate = sess.startDate;
-    }
-    return minDate;
-  };
-
-  const checkMaxDateMOnth = (sessions) => {
-    if (
-      new Date(getMaxDate(sessions)).getMonth() !==
-      new Date(getMinDate(sessions)).getMonth()
-    )
-      return new Date(getMaxDate(sessions)).toLocaleString("en-us", {
-        month: "short",
-      });
-    else return null;
-  };
 
   const toggleStarred = async (e) => {
     e.preventDefault();

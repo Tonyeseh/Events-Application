@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-// import { axiosPrivate } from "../api/axios";
 import useAuth from "../hooks/useAuth";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 
@@ -613,7 +612,10 @@ const EditProfile = () => {
                 />
               </div>
               <div className="flex justify-around my-3 gap-4">
-                <label className="font-bold w-1/4 text-right" htmlFor="website">
+                <label
+                  className="font-bold w-1/4 text-right"
+                  htmlFor="website"
+                >
                   Website:
                 </label>
                 <input
@@ -627,7 +629,10 @@ const EditProfile = () => {
                 />
               </div>
               <div className="flex justify-around my-3 gap-4">
-                <label className="font-bold w-1/4 text-right" htmlFor="company">
+                <label
+                  className="font-bold w-1/4 text-right"
+                  htmlFor="company"
+                >
                   Company:
                 </label>
                 <input
@@ -671,7 +676,10 @@ const EditProfile = () => {
                 />
               </div>
               <div className="flex justify-around my-3 gap-4">
-                <label className="font-bold w-1/4 text-right" htmlFor="address">
+                <label
+                  className="font-bold w-1/4 text-right"
+                  htmlFor="address"
+                >
                   Address:
                 </label>
                 <textarea
@@ -685,7 +693,10 @@ const EditProfile = () => {
                 />
               </div>
               <div className="flex justify-around my-3 gap-4">
-                <label className="font-bold w-1/4 text-right" htmlFor="city">
+                <label
+                  className="font-bold w-1/4 text-right"
+                  htmlFor="city"
+                >
                   City/Town:
                 </label>
                 <input
@@ -699,7 +710,10 @@ const EditProfile = () => {
                 />
               </div>
               <div className="flex justify-around my-3 gap-4">
-                <label className="font-bold w-1/4 text-right" htmlFor="country">
+                <label
+                  className="font-bold w-1/4 text-right"
+                  htmlFor="country"
+                >
                   Country:
                 </label>
                 <input

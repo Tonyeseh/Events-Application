@@ -33,22 +33,12 @@ export const FormProvider = ({ children }) => {
 
     const value = type === "file" ? e.target.files[0] : e.target.value;
 
-    if (name.startsWith("session")) {
-      setFormData((prevData) => {
-        prevData.session = {
-          ...prevData.session,
-          [name]: value,
-        };
-        return prevData;
-      });
-    } else {
-      setFormData((prevData) => {
-        return {
-          ...prevData,
-          [name]: value,
-        };
-      });
-    }
+    setFormData((prevData) => {
+      return {
+        ...prevData,
+        [name]: value,
+      };
+    });
   };
 
   return (

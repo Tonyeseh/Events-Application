@@ -22,6 +22,7 @@ import useAuth from "../hooks/useAuth";
 import { Popover } from "../components/popover/popover";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import EventPageLoading from "../components/states/EventPageLoading";
+import { getMaxDate } from "../helperFunc/dateUtils";
 
 const EventPage = () => {
   const { auth } = useAuth();
@@ -228,6 +229,15 @@ const EventPage = () => {
                           day: "numeric",
                         }
                       )}
+                      {eventData.session.length > 1 &&
+                        ` - ${new Date(
+                          getMaxDate(eventData.session)
+                        ).toLocaleString("en-us", {
+                          weekday: "long",
+                          year: "numeric",
+                          month: "short",
+                          day: "numeric",
+                        })}`}
                     </span>
                   </p>
                   <p className=" font-thin my-2">
@@ -246,12 +256,16 @@ const EventPage = () => {
                       />
                     </svg>
                     <span className="align-middle">{`${new Date(
-                      `${eventData.session[0].startDate}T${eventData.session[0].startTime}`
+                      `${new Date().toISOString().split("T")[0]}T${
+                        eventData.session[0].startTime
+                      }`
                     ).toLocaleTimeString("en-US", {
                       hour: "2-digit",
                       minute: "2-digit",
                     })} - ${new Date(
-                      `${eventData.session[0].startDate}T${eventData.session[0].endTime}`
+                      `${new Date().toISOString().split("T")[0]}T${
+                        eventData.session[0].endTime
+                      }`
                     ).toLocaleTimeString("en-US", {
                       hour: "2-digit",
                       minute: "2-digit",

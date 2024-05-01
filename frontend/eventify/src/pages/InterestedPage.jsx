@@ -1,21 +1,19 @@
 import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import { axiosPrivate } from "../api/axios";
+// import { axiosPrivate } from "../api/axios";
 import EventCard from "../components/Cards/EventCard";
 import useAuth from "../hooks/useAuth";
+import useAxiosPrivate from "../hooks/useAxiosPrivate";
 
 const InterestedPage = () => {
   const { auth } = useAuth();
   const [events, setEvents] = useState([]);
+  const axiosPrivate = useAxiosPrivate();
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axiosPrivate("/user/interested", {
-          headers: {
-            Authorization: `Bearer ${auth.accessToken}`,
-          },
-        });
+        const response = await axiosPrivate("/user/interested");
         setEvents(response.data.events);
       } catch (error) {
         console.error(error);
@@ -33,7 +31,10 @@ const InterestedPage = () => {
           <div className="flex flex-wrap -mx-5 -mb-10">
             {events &&
               events.map((event) => (
-                <EventCard key={event._id} event={event} />
+                <EventCard
+                  key={event._id}
+                  event={event}
+                />
               ))}
           </div>
         </div>

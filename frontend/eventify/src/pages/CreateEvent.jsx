@@ -13,12 +13,13 @@ const CreateEvent = () => {
   const [sessionChildren, setSessionChildren] = useState({
     id: Math.random(100000),
     startTime: "00:00",
-    startDate: new Date(),
+    startDate: "",
     endTime: "00:00",
     endDate: "",
   });
 
   const addSession = (e) => {
+    e.preventDefault();
     if (
       sessionChildren.endTime &&
       sessionChildren.startDate &&
@@ -31,7 +32,7 @@ const CreateEvent = () => {
       setSessionChildren({
         id: Math.random(100000),
         startTime: "00:00",
-        startDate: new Date(),
+        startDate: "",
         endTime: "00:00",
         endDate: "",
       });
@@ -50,8 +51,10 @@ const CreateEvent = () => {
   };
 
   const handleSessionChange = (e) => {
+    const { name, value } = e.target;
+    // const newValue = type === "date" ? new Date(value).toString() : value;
     setSessionChildren((prevData) => {
-      return { ...prevData, [e.target.name]: e.target.value };
+      return { ...prevData, [name]: value };
     });
   };
 

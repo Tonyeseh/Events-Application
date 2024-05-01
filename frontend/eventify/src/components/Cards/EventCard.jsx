@@ -3,6 +3,12 @@ import { useNavigate, useLocation, Link } from "react-router-dom";
 import { axiosPrivate } from "../../api/axios";
 import useAuth from "../../hooks/useAuth";
 
+import {
+  getMaxDate,
+  getMinDate,
+  checkMaxDateMOnth,
+} from "../../helperFunc/dateUtils";
+
 const EventCard = ({ event }) => {
   const { auth } = useAuth();
   const navigate = useNavigate();
@@ -86,34 +92,36 @@ const EventCard = ({ event }) => {
           <div className="text-center w-1/3">
             <p className="text-[#4539B4] mb-1 font-extrabold">
               {event &&
-                new Date(event.session[0].startDate).toLocaleString("en-us", {
+                new Date(getMinDate(event.session)).toLocaleString("en-us", {
                   month: "short",
                 })}
             </p>
             <p className="text-sm font-bold">
-              {/* {event && event.session[0].endDate
-              ? `${new Date(event.session[0].startDate).toLocaleString(
-                  "en-us",
-                  {
-                    day: "numeric",
-                  }
-                )} - ${new Date(event.session[0].endDate).toLocaleString(
-                  "en-us",
-                  {
-                    day: "numeric",
-                  }
-                )}`
-              : new Date(event.session[0].startDate).toLocaleString("en-us", {
-                  day: "numeric",
-                })} */}
               {event &&
-                `${new Date(event.session[0].startDate).toLocaleString(
-                  "en-us",
-                  {
-                    day: "numeric",
-                  }
-                )}`}
+                `${new Date(getMinDate(event.session)).toLocaleString("en-us", {
+                  day: "numeric",
+                })}`}{" "}
             </p>
+
+            {event.session.length > 1 && " - "}
+
+            {event.session.length > 1 && checkMaxDateMOnth(event.session) ? (
+              <p className="text-[#4539B4] mb-1 font-extrabold">
+                {checkMaxDateMOnth(event.session)}
+              </p>
+            ) : null}
+
+            {event.session.length > 1 && (
+              <p className="text-sm font-bold">
+                {event &&
+                  `${new Date(getMaxDate(event.session)).toLocaleString(
+                    "en-us",
+                    {
+                      day: "numeric",
+                    }
+                  )}`}{" "}
+              </p>
+            )}
           </div>
           <div className="pl-3 text-sm text-gray-700">
             <h3 className="text-base font-semibold p-0.5">
@@ -125,12 +133,16 @@ const EventCard = ({ event }) => {
             <p className="p-0.5 font-thin">
               {event &&
                 `${new Date(
-                  `${event.session[0].startDate}T${event.session[0].startTime}`
+                  `${new Date().toISOString().split("T")[0]}T${
+                    event.session[0].startTime
+                  }`
                 ).toLocaleTimeString("en-US", {
                   hour: "2-digit",
                   minute: "2-digit",
                 })} - ${new Date(
-                  `${event.session[0].startDate}T${event.session[0].endTime}`
+                  `${new Date().toISOString().split("T")[0]}T${
+                    event.session[0].endTime
+                  }`
                 ).toLocaleTimeString("en-US", {
                   hour: "2-digit",
                   minute: "2-digit",

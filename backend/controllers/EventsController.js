@@ -59,6 +59,10 @@ const newEvent = async (req, res) => {
     isPublished = false,
     tags,
   } = req.body;
+  for (const sess of session) {
+    sess.startDate = new Date(sess.startDate);
+    sess.endDate && sess.endDate === new Date(sess.endDate);
+  }
   if (
     !title &&
     !category &&
@@ -70,11 +74,11 @@ const newEvent = async (req, res) => {
   ) {
     return res.status(400).json({ error: "Invalid payload" });
   }
-  // if (location === 'physical' && !address) {
-  //   return res
-  //     .status(400)
-  //     .json({ error: "address must ve provided for a physical event." });
-  // }
+  if (!address) {
+    return res
+      .status(400)
+      .json({ error: "address must be provided for any event." });
+  }
   if (ticketType === "ticket" && !tickets) {
     res.status(400).json({ error: "Please add tickets classes" });
     return;
@@ -113,7 +117,10 @@ const updateEvent = async (req, res) => {
 const getEvents = async (req, res) => {
   const { location } = req.query;
 
-  const subQuery = { isPublished: true };
+  const subQuery = {
+    isPublished: true,
+    "session.startDate": { $gt: new Date() },
+  };
 
   const query = location && location === "online" ? { location } : {};
 

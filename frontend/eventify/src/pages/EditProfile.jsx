@@ -727,6 +727,65 @@ const EditProfile = () => {
                 />
               </div>
             </div>
+            <div className="my-5">
+              <div className="flex gap-4">
+                <div className="w-1/4"></div>
+                <h3 className="text-xl font-bold w-full">
+                  Social Media Handles
+                </h3>
+              </div>
+              <div className="flex justify-around my-3 gap-4">
+                <label
+                  className="font-bold w-1/4 text-right"
+                  htmlFor="twitter"
+                >
+                  Twitter handle:
+                </label>
+                <input
+                  className="p-2 border border-[#8282827e] rounded-md mb-5 w-full focus:outline-none focus:ring focus:border-[#2b293d] placeholder:text-[#8282827e] placeholder:text-sm"
+                  type="text"
+                  id="twitter"
+                  placeholder="Enter Twitter handle"
+                  name="twitter"
+                  value={userData.twitter}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="flex justify-around my-3 gap-4">
+                <label
+                  className="font-bold w-1/4 text-right"
+                  htmlFor="facebook"
+                >
+                  Facebook handle:
+                </label>
+                <input
+                  className="p-2 border border-[#8282827e] rounded-md mb-5 w-full focus:outline-none focus:ring focus:border-[#2b293d] placeholder:text-[#8282827e] placeholder:text-sm"
+                  id="facebook"
+                  type="text"
+                  placeholder="Enter Facebook handle"
+                  name="facebook"
+                  value={userData.facebook}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="flex justify-around my-3 gap-4">
+                <label
+                  className="font-bold w-1/4 text-right"
+                  htmlFor="instagram"
+                >
+                  Instagram handle:
+                </label>
+                <input
+                  className="p-2 border border-[#8282827e] rounded-md mb-5 w-full focus:outline-none focus:ring focus:border-[#2b293d] placeholder:text-[#8282827e] placeholder:text-sm"
+                  type="text"
+                  id="instagram"
+                  placeholder="Enter Instagram handle"
+                  name="instagram"
+                  value={userData.instagram}
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
 
             <div className="flex justify-end">
               <button

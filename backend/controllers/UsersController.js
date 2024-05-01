@@ -48,6 +48,9 @@ export default class UsersController {
       address,
       city,
       country,
+      twitter,
+      facebook,
+      instagram,
     } = req.body;
 
     if (!userEmail) return res.status(403).json({ error: "Forbidden" });
@@ -81,6 +84,9 @@ export default class UsersController {
             country,
             profileCover,
             profilePics,
+            facebook,
+            twitter,
+            instagram,
           },
         }
       );

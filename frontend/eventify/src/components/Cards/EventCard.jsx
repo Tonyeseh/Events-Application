@@ -91,21 +91,6 @@ const EventCard = ({ event }) => {
                 })}
             </p>
             <p className="text-sm font-bold">
-              {/* {event && event.session[0].endDate
-              ? `${new Date(event.session[0].startDate).toLocaleString(
-                  "en-us",
-                  {
-                    day: "numeric",
-                  }
-                )} - ${new Date(event.session[0].endDate).toLocaleString(
-                  "en-us",
-                  {
-                    day: "numeric",
-                  }
-                )}`
-              : new Date(event.session[0].startDate).toLocaleString("en-us", {
-                  day: "numeric",
-                })} */}
               {event &&
                 `${new Date(event.session[0].startDate).toLocaleString(
                   "en-us",
@@ -125,12 +110,16 @@ const EventCard = ({ event }) => {
             <p className="p-0.5 font-thin">
               {event &&
                 `${new Date(
-                  `${event.session[0].startDate}T${event.session[0].startTime}`
+                  `${new Date().toISOString().split("T")[0]}T${
+                    event.session[0].startTime
+                  }`
                 ).toLocaleTimeString("en-US", {
                   hour: "2-digit",
                   minute: "2-digit",
                 })} - ${new Date(
-                  `${event.session[0].startDate}T${event.session[0].endTime}`
+                  `${new Date().toISOString().split("T")[0]}T${
+                    event.session[0].endTime
+                  }`
                 ).toLocaleTimeString("en-US", {
                   hour: "2-digit",
                   minute: "2-digit",

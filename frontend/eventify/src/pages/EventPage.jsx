@@ -228,12 +228,16 @@ const EventPage = () => {
                       />
                     </svg>
                     <span className="align-middle">{`${new Date(
-                      `${eventData.session[0].startDate}T${eventData.session[0].startTime}`
+                      `${new Date().toISOString().split("T")[0]}T${
+                        eventData.session[0].startTime
+                      }`
                     ).toLocaleTimeString("en-US", {
                       hour: "2-digit",
                       minute: "2-digit",
                     })} - ${new Date(
-                      `${eventData.session[0].startDate}T${eventData.session[0].endTime}`
+                      `${new Date().toISOString().split("T")[0]}T${
+                        eventData.session[0].endTime
+                      }`
                     ).toLocaleTimeString("en-US", {
                       hour: "2-digit",
                       minute: "2-digit",

@@ -1,3 +1,4 @@
+import { ObjectId } from "mongodb";
 import dbClient from "../utils/db";
 
 export default class UsersController {
@@ -14,6 +15,25 @@ export default class UsersController {
     delete user.password;
 
     return res.status(200).json(user);
+  }
+
+  static async getUser(req, res) {
+    const { userId } = req.params;
+
+    const user = await (
+      await dbClient.usersCollection()
+    ).findOne(new ObjectId(userId));
+    if (!user) return res.status(404).json({ error: "Not found" });
+
+    console.log(user);
+
+    res.json({
+      id: user._id,
+      profilePics: user.profilePics,
+      email: user.email,
+      firstName: user.firstName,
+      lastName: user.lastName,
+    });
   }
 
   static async updateUser(req, res) {

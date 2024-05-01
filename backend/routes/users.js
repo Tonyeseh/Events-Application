@@ -8,6 +8,7 @@ usersRouter.get("/profile", verifyJWT, UsersController.getProfile);
 usersRouter.post("/profile", verifyJWT, UsersController.updateUser);
 usersRouter.get("/interested", verifyJWT, UsersController.getInterestedEvents);
 usersRouter.get("/myevents", verifyJWT, UsersController.getUserEvents);
+usersRouter.get("/:userId", UsersController.getUser);
 // usersRouter.put('/users/update-password', UsersController.updatePassword)
 // usersRouter.put('/users/update-email')
 // usersRouter.put('/users', UsersController.updateUser)

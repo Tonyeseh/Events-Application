@@ -48,8 +48,6 @@ export default class UsersController {
       address,
       city,
       country,
-      profilePics,
-      profileCover,
     } = req.body;
 
     if (!userEmail) return res.status(403).json({ error: "Forbidden" });
@@ -59,6 +57,13 @@ export default class UsersController {
         await dbClient.usersCollection()
       ).findOne({ email: userEmail });
       if (!user) return res.status(403).json({ error: "Forbidden" });
+
+      const profilePics = req.files.profilePics
+        ? req.files.profilePics[0].path
+        : user.profilePics;
+      const profileCover = req.files.profileCover
+        ? req.files.profileCover[0].path
+        : user.profileCover;
 
       const result = await (
         await dbClient.usersCollection()

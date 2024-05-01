@@ -74,11 +74,11 @@ const newEvent = async (req, res) => {
   ) {
     return res.status(400).json({ error: "Invalid payload" });
   }
-  // if (location === 'physical' && !address) {
-  //   return res
-  //     .status(400)
-  //     .json({ error: "address must ve provided for a physical event." });
-  // }
+  if (!address) {
+    return res
+      .status(400)
+      .json({ error: "address must be provided for any event." });
+  }
   if (ticketType === "ticket" && !tickets) {
     res.status(400).json({ error: "Please add tickets classes" });
     return;

@@ -170,9 +170,54 @@ const resetPassword = async (req, res) => {
   res.status(200).json({ token });
 };
 
+const updatePassword = async (req, res) => {
+  const { userEmail } = req;
+  const { currentPwd, confirmPwd, newPwd } = req.body;
+
+  if (!userEmail) return res.status(403).json({ error: "Forbidden" });
+
+  try {
+    const user = await (
+      await dbClient.usersCollection()
+    ).findOne({ email: userEmail });
+    if (!user) return res.status(403).json({ error: "Forbidden" });
+
+    if (!currentPwd || !confirmPwd || !newPwd)
+      return res.status(400).json({ error: "Invalid payload" });
+    if (!(await bcrypt.compare(currentPwd, user.password)))
+      return res.status(401).json({ error: "Unauthorized" });
+
+    if (confirmPwd !== newPwd)
+      return res
+        .status(400)
+        .json({ error: "Confirm Password doesn't match new Password" });
+
+    const hashedPwd = bcrypt.hash(newPwd, 10);
+
+    const result = await (
+      await dbClient.usersCollection()
+    ).updateOne({ _id: user._id }, { $set: { password: hashedPwd } });
+
+    console.log(result);
+
+    if (result.ok === 1 && result.modifiedCount === 1)
+      return res.status(204).json();
+
+    return res
+      .status(500)
+      .json({ error: "Cannot update password now, try again." });
+  } catch (error) {
+    console.error(error);
+    return res
+      .status(500)
+      .json({ error: "Cannot update password now, try again." });
+  }
+};
+
 export default {
   authLogin,
   authRegister,
   authLogout,
   resetPassword,
+  updatePassword,
 };

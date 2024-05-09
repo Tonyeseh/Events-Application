@@ -3,7 +3,6 @@ import dbClient from "../utils/db";
 
 export default class UsersController {
   static async getProfile(req, res) {
-    console.log(req.userEmail);
     if (!req.userEmail) return res.status(403).json({ error: "Forbidden" });
 
     const user = await (
@@ -29,10 +28,27 @@ export default class UsersController {
 
     res.json({
       id: user._id,
-      profilePics: user.profilePics,
-      email: user.email,
-      firstName: user.firstName,
-      lastName: user.lastName,
+      media: { profilePics: user.profilePics, profileCover: user.profileCover },
+      personalInfo: {
+        email: user.email,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        website: user.website,
+        company: user.company,
+        aboutMe: user.aboutMe,
+      },
+      contactInfo: {
+        phoneNumber: user.phoneNumber,
+        address: user.address,
+        country: user.country,
+        city: user.city,
+      },
+      socialMedia: {
+        instagram: user.instagram,
+        facebook: user.facebook,
+        twitter: user.twitter,
+      },
+      preferences: {},
     });
   }
 
@@ -44,6 +60,7 @@ export default class UsersController {
       lastName,
       website,
       company,
+      aboutMe,
       phoneNumber,
       address,
       city,
@@ -78,6 +95,7 @@ export default class UsersController {
             lastName,
             website,
             company,
+            aboutMe,
             phoneNumber,
             address,
             city,

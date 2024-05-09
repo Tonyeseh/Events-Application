@@ -28,3 +28,4 @@ export type aSession = {
   startDate: string;
   endDate?: string;
 };
+type link = { name: string; url: string };

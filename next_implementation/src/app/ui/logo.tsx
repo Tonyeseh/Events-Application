@@ -1,10 +1,11 @@
+import { NavbarBrand } from "flowbite-react";
 import Image from "next/image";
 
 export default function Logo() {
   return (
-    <a
+    <NavbarBrand
       href="#"
-      className="inline-flex items-center mb-4 text-xl font-semibold text-gray-900 dark:text-white"
+      // className="inline-flex items-center mb-4 text-xl font-semibold text-gray-900 dark:text-white"
     >
       <Image
         className="w-8 h-8 mr-2"
@@ -14,6 +15,6 @@ export default function Logo() {
         height={30}
       />
       Flowbite
-    </a>
+    </NavbarBrand>
   );
 }

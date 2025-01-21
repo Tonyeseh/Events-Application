@@ -21,10 +21,10 @@ export default async function Page() {
       <form className="mt-4 space-y-5 md:mt-6" action="#">
         <div className="grid gap-6 md:grid-cols-2">
           <Input
-            id="firstName"
+            id="email"
             type="text"
-            label="First Name"
-            placeholder="Enter first name"
+            label="Email"
+            placeholder="Enter your email"
           />
           <Input
             id="password"
